@@ -23,7 +23,7 @@ with tab_home:
     st.write("Esperamos que você goste do conteúdo!")
     
     st.write("Testando se o aplicativo atualiza automaticamente")
-    image = logo_ds.png
+    image = 'logo_ds.png'
     image_link = 'https://github.com/AugustoCM27/st_MultipageApp/blob/6c54b49d87734a2bf6a4c80981f2fcb7a3ca0e6b/logo_ds.png'
     st.image(image)
 
