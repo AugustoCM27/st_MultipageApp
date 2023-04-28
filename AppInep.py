@@ -24,7 +24,6 @@ with tab_home:
     
     st.write("Testando se o aplicativo atualiza automaticamente")
     image = 'logo_ds.png'
-    image_link = 'https://github.com/AugustoCM27/st_MultipageApp/blob/6c54b49d87734a2bf6a4c80981f2fcb7a3ca0e6b/logo_ds.png'
     st.image(image)
 
 with tab_analise:
@@ -43,6 +42,7 @@ with tab_analise:
         plt.xlabel('x')
         plt.ylabel('y')
         st.pyplot(fig)
+        st.image(image)
     elif grafico == 'Gráfico 2':
         x = [0, 1, 2, 3, 4, 5]
         y = [0, 1, 2, 3, 4, 5]
