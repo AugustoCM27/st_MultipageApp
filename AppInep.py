@@ -38,7 +38,7 @@ with tab_analise:
     elif grafico == 'Mapas do Brasil - ENEM 2021':
         image = 'mapas_dados_enem.png'
         st.image(image)
-    elif grafico == 'Gráfico 3':
+    elif grafico == 'Notas médias por UF - ENEM 2021':
         image = 'hist_notas_enem_estado.png'
         st.image(image)
 
