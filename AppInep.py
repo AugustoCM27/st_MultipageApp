@@ -22,9 +22,8 @@ with tab_home:
             " superamos desafios!")
     st.write("Esperamos que você goste do conteúdo!")
     
-    st.write("Testando se o aplicativo atualiza automaticamente")
-    image = 'logo_ds.png'
-    st.image(image)
+    image_logo = 'logo_ds.png'
+    st.image(image_logo)
 
 with tab_analise:
     st.title("Análises e Gráficos")
@@ -32,35 +31,16 @@ with tab_analise:
     st.write("Esse espaço é reservado para as análises e gráficos feitos pela equipe do Projeto INEP")
 
     grafico = st.selectbox('Qual gráfico você gostaria de visualizar?',
-                           ['Gráfico 1', 'Gráfico 2', 'Gráfico 3'])
-    if grafico == 'Gráfico 1':
-        x = [0, 1, 2, 3, 4, 5]
-        y = [0, 1, 4, 9, 16, 25]
-        fig = plt.figure()
-        plt.plot(x, y, color='red')
-        plt.title("Título de teste")
-        plt.xlabel('x')
-        plt.ylabel('y')
-        st.pyplot(fig)
+                           ['Distribuições dos Dados - ENEM 2021', 'Mapas do Brasil - ENEM 2021', 'Notas médias por UF - ENEM 2021'])
+    if grafico == 'Distribuições dos Dados - ENEM 2021':
+        image = 'hist_dados_enem.png'
         st.image(image)
-    elif grafico == 'Gráfico 2':
-        x = [0, 1, 2, 3, 4, 5]
-        y = [0, 1, 2, 3, 4, 5]
-        fig = plt.figure()
-        plt.plot(x, y, color='red')
-        plt.title("Título de teste")
-        plt.xlabel('x')
-        plt.ylabel('y')
-        st.pyplot(fig)
+    elif grafico == 'Mapas do Brasil - ENEM 2021':
+        image = 'mapas_dados_enem.png'
+        st.image(image)
     elif grafico == 'Gráfico 3':
-        x = [0, 1, 2, 3, 4, 5]
-        y = [0, 1, 1, 2, 3, 5]
-        fig = plt.figure()
-        plt.plot(x, y, color='red')
-        plt.title("Título de teste")
-        plt.xlabel('x')
-        plt.ylabel('y')
-        st.pyplot(fig)
+        image = 'hist_notas_enem_estado.png'
+        st.image(image)
 
 with tab_contato:
     st.title("Contato")
@@ -74,9 +54,3 @@ with tab_contato:
     st.subheader("Onde nos encontrar")
     st.text("Faculdade de Ciências Aplicadas (FCA-UNICAMP)")
     st.text('Endereço: Rua Pedro Zaccaria, 1300, Limeira-SP, 13484-350')
-#from PIL import Image
-#img = Image.open("logo_ds.png")
-
-# display image using streamlit
-# width is used to set the width of an image
-#st.image(img, width=200)
