@@ -25,7 +25,7 @@ with tab_home:
     st.write("Testando se o aplicativo atualiza automaticamente")
     
     image_link = 'https://github.com/AugustoCM27/st_MultipageApp/blob/6c54b49d87734a2bf6a4c80981f2fcb7a3ca0e6b/logo_ds.png'
-    st.image(image_link)
+    st.image(image_link, caption='logo', width=350)
 
 with tab_analise:
     st.title("Análises e Gráficos")
