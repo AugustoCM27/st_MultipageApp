@@ -63,8 +63,11 @@ with tab_contato:
 
     st.subheader("Nossas redes sociais")
     st.write("Instagram: [@ligadsunicamp](https://instagram.com/ligadsunicamp?igshid=YmMyMTA2M2Y=)")
-    st.write("GitHub: (adicionar aqui)")
-    st.write("LinkedIn: (adicionar aqui)")
+    st.write("GitHub: [LigaDS](https://github.com/LigaDS)")
+    st.write("LinkedIn: [Liga de Data Science](https://www.linkedin.com/company/liga-de-data-science/about/)")
+    st.write("LinkTree: [ligadsunicamp](https://linktr.ee/ligadsunicamp)")
+    st.write("WordPress: [ligadsunicamp](https://ligadsunicamp.wordpress.com)")
+       
 
     st.subheader("Onde nos encontrar")
     st.text("Faculdade de Ciências Aplicadas (FCA-UNICAMP)")
