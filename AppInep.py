@@ -22,7 +22,7 @@ with tab_home:
             " superamos desafios!")
     st.write("Esperamos que você goste do conteúdo!")
     
-    st.write("Testando se o aplicativo atualiza automaticamente")
+    #st.write("Testando se o aplicativo atualiza automaticamente")
 
 with tab_analise:
     st.title("Análises e Gráficos")
