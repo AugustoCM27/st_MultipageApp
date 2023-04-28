@@ -26,7 +26,7 @@ with tab_home:
     st.image(image_logo)
     
     st.subheader("Colaboradores 🤜🤛")
-    st.write("Arara, Bia, Isa, Nemo, Ximbinha, Meio, Juvi, Henrique, Felipe, Leonan, Pandinha, João Victor e Augusto")
+    st.write("Arara, Bia, Isa, Nemo, Ximbinha, Meio, Juvi, Henrique, Felipe, Pandinha e Augusto")
 
 with tab_analise:
     st.title("Análises e Gráficos")
