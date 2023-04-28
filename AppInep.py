@@ -25,7 +25,7 @@ with tab_home:
     image_logo = 'logo_ds.png'
     st.image(image_logo)
     
-    st.subheader("Colaboradores")
+    st.subheader("Colaboradores 🤜🤛")
     st.write("Arara, Bia, Isa, Nemo, Ximbinha, Meio, Juvi, Henrique, Felipe, Leonan, Pandinha, João Victor e Augusto")
 
 with tab_analise:
