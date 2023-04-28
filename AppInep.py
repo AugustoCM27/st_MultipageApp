@@ -31,16 +31,31 @@ with tab_analise:
     st.write("Esse espaço é reservado para as análises e gráficos feitos pela equipe do Projeto INEP")
 
     grafico = st.selectbox('Qual gráfico você gostaria de visualizar?',
-                           ['Distribuições dos Dados - ENEM 2021', 'Mapas do Brasil - ENEM 2021', 'Notas médias por UF - ENEM 2021'])
+                           ['Distribuições dos Dados - ENEM 2021', 'Mapas do Brasil - ENEM 2021', 'Notas médias por competência - ENEM 2021'])
     if grafico == 'Distribuições dos Dados - ENEM 2021':
         image = 'hist_dados_enem.png'
         st.image(image)
     elif grafico == 'Mapas do Brasil - ENEM 2021':
         image = 'mapas_dados_enem.png'
         st.image(image)
-    elif grafico == 'Notas médias por UF - ENEM 2021':
-        image = 'hist_notas_enem_estado.png'
-        st.image(image)
+    elif grafico == 'Notas médias por competência - ENEM 2021':
+        radio_but = st.radio("Qual competência você deseja visualizar?",
+                            ('Ciências Naturais', 'Ciências Humanas', 'Linguagens e Códigos', 'Matemática', 'Redação'))
+        if radio_but == 'Ciências Naturais':
+            image = 'hist_dados_cn.png'
+            st.image(image)
+        elif radio_but == 'Ciências Humanas':
+            image = 'hist_dados_ch.png'
+            st.image(image)
+        elif radio_but == 'Linguagens e Códigos':
+            image = 'hist_dados_lc.png'
+            st.image(image)
+        elif radio_but == 'Matemática':
+            image = 'hist_dados_mat.png'
+            st.image(image)
+        elif radio_but == 'Redação':
+            image = 'hist_dados_red.png'
+            st.image(image)
 
 with tab_contato:
     st.title("Contato")
