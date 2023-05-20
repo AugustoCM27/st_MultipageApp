@@ -36,7 +36,7 @@ with tab_analise:
     grafico = st.selectbox('Qual gráfico você gostaria de visualizar?',
                            ['Distribuições dos Dados - ENEM 2021', 'Mapas do Brasil - ENEM 2021', 'Notas médias por competência - ENEM 2021'])
     if grafico == 'Distribuições dos Dados - ENEM 2021':
-        image = 'hist_dados_enem.png'
+        image = 'spt1_hist.png'
         st.image(image)
     elif grafico == 'Mapas do Brasil - ENEM 2021':
         image = 'mapas_dados_enem.png'
