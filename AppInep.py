@@ -52,12 +52,65 @@ with tab_analise1:
                                   'Distribuições dos participantes (Histogramas)',
                                   'Análises por UF (Mapas)'))
         
-        df_spt1 = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+        df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+        # Dicionário de mapeamento das categorias para intervalos
+        faixas_etarias = {
+            1: '-17',2: '17',3: '18',4: '19',5: '20',6: '21',7: '22',8: '23',9: '24',10: '25',11: '26-30',
+            12: '31-35',13: '36-40',14: '41-45',15: '46-50',16: '51-55',17: '56-60',18: '61-65',19: '66-70',20: '70+'}
+        # Substituir os valores da coluna "Faixa Etária" pelos intervalos correspondentes
+        df['TP_FAIXA_ETARIA'] = df['TP_FAIXA_ETARIA'].map(faixas_etarias)
+
+        nacionalidades = {0: 'Não informado',1: 'Brasileiro(a)',2: 'Brasileiro(a) Naturalizado(a)',3: 'Estrangeiro(a)',4: 'Brasileiro(a) Nato(a), nascido(a) no exterior'}
+        df['TP_NACIONALIDADE'] = df['TP_NACIONALIDADE'].map(nacionalidades)
+
+        cor_raca = {0: 'Não declarado',1: 'Branca',2: 'Preta',3: 'Parda',4: 'Amarela',5: 'Indígena',6: 'Não dispõe informação'}
+        df['TP_COR_RACA'] = df['TP_COR_RACA'].map(cor_raca)
+
+        escolas = {1: 'Não respondeu',2: 'Pública',3: 'Privada'}
+        df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
         
         if radio_analise == 'Estatísticas das competências':
-            st.write(df_spt1[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
+            st.write(df[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
+            # Criando subplots para as distribuições
+            fig, axs = plt.subplots(2, 2, layout="constrained", figsize=(15,10))
+            # ----------------------- Distribuição da Faixa Etária -----------------------
+            axs[0,0] = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1, ax=axs[0,0], color='blue');
+            axs[0,0].set_title('Distribuição da Faixa Etária', fontsize=10);
+            xticks = [rec.get_x() + 0.5*axs[0,0].patches[0].get_width() for rec in list(axs[0,0].patches)]
+            axs[0,0].set_xticks(xticks, labels=faixas_etarias.values(), rotation=45, fontsize=8);
+            axs[0,0].set_xlabel("Idades (anos)", fontsize=10);
+            axs[0,0].set_yticklabels(axs[0, 0].get_yticks(), fontsize=8);
+            axs[0,0].set_ylabel("Quantidade", fontsize=10);
+            # ----------------------- Distribuição da Nacionalidade -----------------------
+            axs[0,1] = sns.histplot(df.loc[df["TP_NACIONALIDADE"]!='Brasileiro(a)', "TP_NACIONALIDADE"], binwidth=1, ax=axs[0,1], color='green')
+            axs[0,1].set_title('Distribuição da Nacionalidade sem Brasileiros Nascidos', fontsize=10);
+            axs[0,1].set_xticklabels(axs[0,1].get_xticks(), fontsize=8);
+            axs[0,1].set_xticklabels(['Brasileiro(a) Naturalizado(a)','Estrangeiro(a)', 'Brasileiro(a) Nato(a), nascido(a) no exterior', 'Não informado'], 
+                                     rotation=10, fontsize=8);
+            axs[0,1].set_xlabel("Situação", fontsize=10);
+            axs[0,1].set_yticklabels(axs[0,1].get_yticks(), fontsize=8);
+            axs[0,1].set_ylabel("Quantidade", fontsize=10);
+            # ----------------------- Distribuição da Cor/Raça -----------------------
+            axs[1,0]= sns.histplot(df["TP_COR_RACA"], binwidth=1, ax=axs[1,0], color='red')
+            axs[1,0].set_title('Distribuição da Cor/Raça', fontsize=10);
+            axs[1,0].set_xticklabels(axs[1,0].get_xticks(), fontsize=8);
+            axs[1,0].set_xticklabels(['Preta','Branca', 'Parda', 'Indígena', 'Não declarado', 'Amarela'], rotation=0, fontsize=8);
+            axs[1,0].set_xlabel("Cor ou Raça", fontsize=10);
+            axs[1,0].set_yticklabels(axs[1,0].get_yticks(), fontsize=8);
+            axs[1,0].set_ylabel("Quantidade", fontsize=10);
+            # ----------------------- Distribuição do Tipo de Escola -----------------------
+            axs[1,1]= sns.histplot(df["TP_ESCOLA"], binwidth=1, ax=axs[1,1], color='yellow')
+            axs[1,1].set_title('Distribuição do Tipo de Escola', fontsize=10);
+            axs[1,1].set_xticklabels(axs[1,1].get_xticks(), fontsize=8);
+            axs[1,1].set_xticklabels(['Não respondeu','Privada', 'Pública'], rotation=0, fontsize=8);
+            axs[1,1].set_xlabel("Tipo de Escola no EM", fontsize=10);
+            axs[1,1].set_yticklabels(axs[1,1].get_yticks(), fontsize=8);
+            axs[1,1].set_ylabel("Quantidade", fontsize=10);
+            
+            st.pyplot(fig)
+            
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
             st.text('Adicionar os mapas e comentários/conclusões')
