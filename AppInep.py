@@ -12,7 +12,7 @@ import shapely
 import warnings
 from shapely.errors import ShapelyDeprecationWarning
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning);
-!pip install descartes
+import descartes
 
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
