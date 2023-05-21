@@ -1,5 +1,4 @@
 matplotlib==3.7.1
 pandas==2.0.1
 plotly==5.14.1
-zipfile==3.11.3
-functools==3.11.3
+
