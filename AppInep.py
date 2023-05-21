@@ -74,7 +74,7 @@ with tab_analise1:
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
             # Criando subplots para as distribuições
-            fig, axs = plt.subplots(2, 2, layout="constrained", figsize=(15,10))
+            fig, axs = plt.subplots(2, 2, layout="constrained", figsize=(20,20))
             # ----------------------- Distribuição da Faixa Etária -----------------------
             axs[0,0] = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1, ax=axs[0,0], color='blue');
             axs[0,0].set_title('Distribuição da Faixa Etária', fontsize=10);
