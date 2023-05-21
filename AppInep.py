@@ -6,6 +6,12 @@ import plotly.graph_objs as go
 import plotly.express as px
 import zipfile
 import seaborn as sns
+#!pip install geobr
+import geobr
+import shapely
+import warnings
+from shapely.errors import ShapelyDeprecationWarning
+warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning)
 
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
@@ -114,6 +120,81 @@ with tab_analise1:
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
             st.text('Adicionar os mapas e comentários/conclusões')
+            
+            UFs = df["SG_UF_PROVA"].unique()
+            variables = {"TP_ENSINO": 2,  # Educação especial
+            "TP_ESCOLA": 3,  #Escola privada
+            "TP_COR_RACA": 1,   # Brancos 
+            "TP_SEXO": "F", 
+            "TP_DEPENDENCIA_ADM_ESC": 1, # Federal 
+            "TP_PRESENCA_CN": 1, # Presente Prova de Ciencias da Natureza
+            "TP_PRESENCA_CH": 1, # Presente Prova de Ciencias Humanas
+            "TP_PRESENCA_LC": 1, # Presente Prova de Linguagem
+            "TP_PRESENCA_MT": 1} # Presente Prova de Matemática
+            translation = {"TP_ENSINO": "Educação especial",
+            "TP_ESCOLA": "Escola privada",
+            "TP_COR_RACA": "Brancos",
+            "TP_SEXO": "Mulheres", 
+            "TP_DEPENDENCIA_ADM_ESC": "Federal" ,
+            "TP_PRESENCA_CN": "Presença Ciencias da Natureza",
+            "TP_PRESENCA_CH": "Presença Ciencias Humanas",
+            "TP_PRESENCA_LC": "Presença Linguagem",
+            "TP_PRESENCA_MT": "Presença Matemática",
+            "AcessoInternet": "Acesso a Internet"
+            }
+            titles = {"Educação especial": "Prop. de Candidatos em Educação Especial",
+            "Escola privada": "Prop. Candidatos de Escolas Privadas",
+            "Brancos": "Índice de Diversidade de Cor",
+            "Mulheres": "Prop. de Candidatas Mulheres", 
+            "Federal":  "Prop. de Candidatos de Escolas Federais",
+            "Presença Ciencias da Natureza": "Presença Ciencias da Natureza",
+            "Presença Ciencias Humanas": "Presença Ciencias Humanas",
+            "Presença Linguagem": "Presença Linguagem",
+            "Presença Matemática": "Presença Matemática",
+            "Acesso a Internet": "Taxa de Acesso a Internet"
+            }
+            
+            dfProportion = pd.DataFrame()
+            for factor in variables.keys():
+                for UF in UFs:
+                    if factor == "TP_COR_RACA":
+                        proportion = df.loc[df["SG_UF_PROVA"]==UF, factor].value_counts().drop(0)
+                        diversity_index = 1/((proportion/proportion.sum())**2).sum() # Simpson’s Index invertido '1/D'
+                        dfProportion.loc[UF, translation[factor]] = diversity_index
+                    else:
+                        proportion = df.loc[df["SG_UF_PROVA"]==UF, factor].value_counts(normalize=True)[variables[factor]]
+                        dfProportion.loc[UF, translation[factor]] = proportion
+            # agrupando por estado e contando o número de ocorrências de cada valor categórico
+            # A: Sem acesso // B: Com acesso
+            df_net = df.groupby(['SG_UF_PROVA', 'Q025']).size().unstack(fill_value=0)
+            # criando uma coluna com o percentual de acesso a internet por estado
+            df_net['Acesso a Internet'] = df_net['B']/(df_net['A'] + df_net['B'])
+            dfProportion = dfProportion.merge(df_net, how='left', left_index=True, right_index=True)
+
+            br = geobr.read_state()
+            df_t = br.merge(dfProportion, how="left", left_on="abbrev_state", right_index=True)
+            
+            plt.rcParams.update({"font.size": 3});
+            quant_figuras = len(translation.values())
+            fig, axs = plt.subplots((quant_figuras+1)//2, 2, figsize=(4, 12), dpi=400);
+            for idx in range(quant_figuras):
+                row = idx//2
+                col = idx%2
+                factor = list(translation.values())[idx]
+                df_t.plot(
+                    column=factor,
+                    cmap="Blues",
+                    legend=True,
+                    legend_kwds={
+                        #"label": factor,
+                        "orientation": "horizontal",
+                        "shrink": 0.4,
+                    },
+                    ax=axs[row, col],
+                );
+                axs[row, col].set_title(titles[factor])
+                axs[row, col].axis("off");
+            st.pyplot(fig)
             st.text('Adicionar link do colab')
             
     elif sprint == 'Sprint 2':
