@@ -187,17 +187,16 @@ with tab_analise1:
         fig_lc = figura(df_melted_lc, df_lc, 'linguagens e códigos')
         fig_cn = figura(df_melted_cn, df_cn, 'ciências da natureza')
 
-        st.title("Testando o plotly")
-        escolha = st.selectbox("Qual competência você deseja ver?", ["red", "mat", "ch", "lc", "cn"])
-        if escolha == 'red':
+        escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
+        if escolha_radio == 'Redação':
             st.plotly_chart(fig_red)
-        elif escolha == 'mat':
+        elif escolha_radio == 'Matemática':
             st.plotly_chart(fig_mat)
-        elif escolha == 'ch':
+        elif escolha_radio == 'Ciências Humanas':
             st.plotly_chart(fig_ch)
-        elif escolha == 'lc':
+        elif escolha_radio == 'Linguagens e Códigos':
             st.plotly_chart(fig_lc)
-        elif escolha == 'cn':
+        elif escolha_radio == 'Ciências da Natureza':
             st.plotly_chart(fig_cn)
         
     elif sprint == 'Sprint 3':
