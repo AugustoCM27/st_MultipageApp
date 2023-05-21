@@ -52,7 +52,7 @@ with tab_analise1:
                                   'Distribuições dos participantes (Histogramas)',
                                   'Análises por UF (Mapas)'))
         
-        df_spt1 = pd.read_csv('/content/MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+        df_spt1 = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
         
         if radio_analise == 'Estatísticas das competências':
             st.write(df_spt1[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
