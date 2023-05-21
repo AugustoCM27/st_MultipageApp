@@ -77,6 +77,7 @@ with tab_analise1:
         
         if radio_analise == 'Estatísticas das competências':
             st.write(df[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
+            
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
             # Criando subplots para as distribuições
@@ -121,6 +122,7 @@ with tab_analise1:
         elif radio_analise == 'Análises por UF (Mapas)':
             st.text('Adicionar os mapas e comentários/conclusões')
             
+            df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             UFs = df["SG_UF_PROVA"].unique()
             variables = {"TP_ENSINO": 2,  # Educação especial
             "TP_ESCOLA": 3,  #Escola privada
