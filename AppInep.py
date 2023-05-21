@@ -5,6 +5,7 @@ from functools import reduce
 import plotly.graph_objs as go
 import plotly.express as px
 import zipfile
+import seaborn as sns
 
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
@@ -47,9 +48,15 @@ with tab_analise1:
     if sprint == 'Sprint 1':
         st.write('Adicionar os gráficos e análises do Sprint 1')
         radio_analise = st.radio(f"*Qual análise do {sprint} você gostaria de ver?*",
-                                 ('Distribuições dos participantes (Histogramas)',
+                                 ('Estatísticas das competências',
+                                  'Distribuições dos participantes (Histogramas)',
                                   'Análises por UF (Mapas)'))
-        if radio_analise == 'Distribuições dos participantes (Histogramas)':
+        
+        df_spt1 = pd.read_csv('/content/MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+        
+        if radio_analise == 'Estatísticas das competências':
+            st.write(df_spt1[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
+        elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
