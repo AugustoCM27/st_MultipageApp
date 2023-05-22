@@ -112,7 +112,7 @@ with tab_analise1:
                 st.pyplot(hist)
             elif histograma == 'Cor/Raça':
                 sns.histplot(df["TP_COR_RACA"], binwidth=1)
-                plt.xticks(rotation=0, fontsize=8)
+                plt.xticks(rotation=10, fontsize=8)
                 plt.yticks(fontsize=8)
                 plt.xlabel('Cor / Raça', fontsize=8)
                 plt.ylabel('Quantidade', fontsize=8)
