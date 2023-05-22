@@ -91,7 +91,7 @@ with tab_analise1:
             histograma = st.radio("Qual distribuição você deseja visualizar?",
                                   ['Faixa Etária', 'Nacionalidade', 'Cor/Raça', 'Tipo de Escola'])
             if histograma == 'Faixa Etária':
-                sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
+                hist = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
                 # Posição dos xticks vai ser o limite direito da barra 
                 # mais metade de seu comprimento
                 xticks = [rec.get_x() + 0.5*hist.patches[0].get_width() for rec in list(hist.patches)]
