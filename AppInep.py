@@ -85,7 +85,8 @@ with tab_analise1:
             escolas = {1: 'Não respondeu',2: 'Pública',3: 'Privada'}
             df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
             
-            hist = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
+            hist = plt.figure()
+            sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
             # Posição dos xticks vai ser o limite direito da barra 
             # mais metade de seu comprimento
             xticks = [rec.get_x() + 0.5*hist.patches[0].get_width() for rec in list(hist.patches)]
