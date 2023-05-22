@@ -205,7 +205,11 @@ with tab_analise1:
         def df_unzip(ano):
             df = pd.read_csv(f'MICRODADOS_ENEM_{ano}_spt2.zip', compression='zip', delimiter=';')
             return df
-
+        
+        df2014 = df_unzip(2014)
+        df2015 = df_unzip(2015)
+        df2016 = df_unzip(2016)
+        df2017 = df_unzip(2017)
         df2018 = df_unzip(2018)
         df2019 = df_unzip(2019)
         df2020 = df_unzip(2020)
@@ -232,7 +236,7 @@ with tab_analise1:
                 return df_notas
 
         # aplicando a função em todas as bases importadas
-        listas_df = [[df2022], [df2021], [df2020], [df2019], [df2018]]
+        listas_df = [[df2022], [df2021], [df2020], [df2019], [df2018], [df2017], [df2016], [df2015], [df2014]]
         listas_trat = []
         for i in range(0, len(listas_df)):
             listas_trat.append(f(listas_df[i]))
@@ -244,14 +248,22 @@ with tab_analise1:
         df20 = listas_trat[2]
         df19 = listas_trat[3]
         df18 = listas_trat[4]
+        df17 = listas_trat[5]
+        df16 = listas_trat[6]
+        df15 = listas_trat[7]
+        df14 = listas_trat[8]
 
         def df_competencia(competencia):
-            df = pd.concat([df18[competencia],
+            df = pd.concat([df14[competencia],
+                            df15[competencia],
+                            df16[competencia],
+                            df17[competencia],
+                            df18[competencia],
                             df19[competencia],
                             df20[competencia],
                             df21[competencia],
                             df22[competencia]], axis=1)
-            df.columns = ['2018', '2019', '2020', '2021', '2022']
+            df.columns = ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022']
             return df
 
         df_red = df_competencia('NU_NOTA_REDACAO')
@@ -283,7 +295,7 @@ with tab_analise1:
 
         # função para criar o novo df
         def melted(df):
-            df_melted = pd.melt(df.reset_index(), id_vars = 'UF', value_vars=['2018', '2019', '2020', '2021', '2022'], var_name='ano')
+            df_melted = pd.melt(df.reset_index(), id_vars = 'UF', value_vars=['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'], var_name='ano')
             df_melted = df_melted.rename(columns = {'value': 'Média da nota'})
             return df_melted
 
