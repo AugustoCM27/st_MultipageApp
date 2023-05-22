@@ -130,9 +130,7 @@ with tab_analise1:
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
             st.text('Adicionar os mapas e comentários/conclusões')
-            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
-                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
-            df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')            
+            
             df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             UFs = df["SG_UF_PROVA"].unique()
             variables = {"TP_ENSINO": 2,  # Educação especial
