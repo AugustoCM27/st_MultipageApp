@@ -211,7 +211,7 @@ with tab_analise1:
     elif sprint == 'Sprint 2':
         st.write('Adicionar os gráficos e análises do Sprint 2')
         def df_unzip(ano):
-            df = pd.read_csv(f'MICRODADOS_ENEM_{ano}.zip', compression='zip', delimiter=';')
+            df = pd.read_csv(f'MICRODADOS_ENEM_{ano}_spt2.zip', compression='zip', delimiter=';')
             return df
         
         df2014 = df_unzip(2014)
