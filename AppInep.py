@@ -77,10 +77,14 @@ with tab_analise1:
         df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
         
         if radio_analise == 'Estatísticas das competências':
+            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
+                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}_spt2.zip', compression='zip', delimiter=';')
             st.write(df[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
             
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
+            df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             # Criando subplots para as distribuições
             fig, axs = plt.subplots(2, 2, layout="constrained", figsize=(20,20))
             # ----------------------- Distribuição da Faixa Etária -----------------------
