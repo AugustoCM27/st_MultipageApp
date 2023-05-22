@@ -59,23 +59,6 @@ with tab_analise1:
                                   'Distribuições dos participantes (Histogramas)',
                                   'Análises por UF (Mapas)'))
         
-        df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
-        # Dicionário de mapeamento das categorias para intervalos
-        faixas_etarias = {
-            1: '-17',2: '17',3: '18',4: '19',5: '20',6: '21',7: '22',8: '23',9: '24',10: '25',11: '26-30',
-            12: '31-35',13: '36-40',14: '41-45',15: '46-50',16: '51-55',17: '56-60',18: '61-65',19: '66-70',20: '70+'}
-        # Substituir os valores da coluna "Faixa Etária" pelos intervalos correspondentes
-        df['TP_FAIXA_ETARIA'] = df['TP_FAIXA_ETARIA'].map(faixas_etarias)
-
-        nacionalidades = {0: 'Não informado',1: 'Brasileiro(a)',2: 'Brasileiro(a) Naturalizado(a)',3: 'Estrangeiro(a)',4: 'Brasileiro(a) Nato(a), nascido(a) no exterior'}
-        df['TP_NACIONALIDADE'] = df['TP_NACIONALIDADE'].map(nacionalidades)
-
-        cor_raca = {0: 'Não declarado',1: 'Branca',2: 'Preta',3: 'Parda',4: 'Amarela',5: 'Indígena',6: 'Não dispõe informação'}
-        df['TP_COR_RACA'] = df['TP_COR_RACA'].map(cor_raca)
-
-        escolas = {1: 'Não respondeu',2: 'Pública',3: 'Privada'}
-        df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
-        
         if radio_analise == 'Estatísticas das competências':
             ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
                                ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
@@ -85,6 +68,23 @@ with tab_analise1:
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
             df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+
+            # Dicionário de mapeamento das categorias para intervalos
+            faixas_etarias = {
+                1: '-17',2: '17',3: '18',4: '19',5: '20',6: '21',7: '22',8: '23',9: '24',10: '25',11: '26-30',
+                12: '31-35',13: '36-40',14: '41-45',15: '46-50',16: '51-55',17: '56-60',18: '61-65',19: '66-70',20: '70+'}
+            # Substituir os valores da coluna "Faixa Etária" pelos intervalos correspondentes
+            df['TP_FAIXA_ETARIA'] = df['TP_FAIXA_ETARIA'].map(faixas_etarias)
+
+            nacionalidades = {0: 'Não informado',1: 'Brasileiro(a)',2: 'Brasileiro(a) Naturalizado(a)',3: 'Estrangeiro(a)',4: 'Brasileiro(a) Nato(a), nascido(a) no exterior'}
+            df['TP_NACIONALIDADE'] = df['TP_NACIONALIDADE'].map(nacionalidades)
+
+            cor_raca = {0: 'Não declarado',1: 'Branca',2: 'Preta',3: 'Parda',4: 'Amarela',5: 'Indígena',6: 'Não dispõe informação'}
+            df['TP_COR_RACA'] = df['TP_COR_RACA'].map(cor_raca)
+
+            escolas = {1: 'Não respondeu',2: 'Pública',3: 'Privada'}
+            df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
+            
             # Criando subplots para as distribuições
             fig, axs = plt.subplots(2, 2, layout="constrained", figsize=(20,20))
             # ----------------------- Distribuição da Faixa Etária -----------------------
