@@ -85,48 +85,17 @@ with tab_analise1:
             escolas = {1: 'Não respondeu',2: 'Pública',3: 'Privada'}
             df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
             
-            # Criando subplots para as distribuições
-            fig1, axs = plt.subplots(1, 2, layout="constrained", figsize=(20,20))
-            # ----------------------- Distribuição da Faixa Etária -----------------------
-            axs[0,0] = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1, ax=axs[0,0], color='blue');
-            axs[0,0].set_title('Distribuição da Faixa Etária', fontsize=10);
-            xticks = [rec.get_x() + 0.5*axs[0,0].patches[0].get_width() for rec in list(axs[0,0].patches)]
-            axs[0,0].set_xticks(xticks, labels=faixas_etarias.values(), rotation=45, fontsize=8);
-            axs[0,0].set_xlabel("Idades (anos)", fontsize=10);
-            axs[0,0].set_yticklabels(axs[0, 0].get_yticks(), fontsize=8);
-            axs[0,0].set_ylabel("Quantidade", fontsize=10);
-            # ----------------------- Distribuição da Nacionalidade -----------------------
-            axs[0,1] = sns.histplot(df.loc[df["TP_NACIONALIDADE"]!='Brasileiro(a)', "TP_NACIONALIDADE"], binwidth=1, ax=axs[0,1], color='green')
-            axs[0,1].set_title('Distribuição da Nacionalidade sem Brasileiros Nascidos', fontsize=10);
-            axs[0,1].set_xticklabels(axs[0,1].get_xticks(), fontsize=8);
-            axs[0,1].set_xticklabels(['Brasileiro(a) Naturalizado(a)','Estrangeiro(a)', 'Brasileiro(a) Nato(a), nascido(a) no exterior', 'Não informado'], 
-                                     rotation=10, fontsize=8);
-            axs[0,1].set_xlabel("Situação", fontsize=10);
-            axs[0,1].set_yticklabels(axs[0,1].get_yticks(), fontsize=8);
-            axs[0,1].set_ylabel("Quantidade", fontsize=10);
-            
-            st.pyplot(fig1)
-            
-            # Criando subplots para as distribuições
-            fig2, axs = plt.subplots(1, 2, layout="constrained", figsize=(20,20))
-            # ----------------------- Distribuição da Cor/Raça -----------------------
-            axs[1,0]= sns.histplot(df["TP_COR_RACA"], binwidth=1, ax=axs[1,0], color='red')
-            axs[1,0].set_title('Distribuição da Cor/Raça', fontsize=10);
-            axs[1,0].set_xticklabels(axs[1,0].get_xticks(), fontsize=8);
-            axs[1,0].set_xticklabels(['Preta','Branca', 'Parda', 'Indígena', 'Não declarado', 'Amarela'], rotation=0, fontsize=8);
-            axs[1,0].set_xlabel("Cor ou Raça", fontsize=10);
-            axs[1,0].set_yticklabels(axs[1,0].get_yticks(), fontsize=8);
-            axs[1,0].set_ylabel("Quantidade", fontsize=10);
-            # ----------------------- Distribuição do Tipo de Escola -----------------------
-            axs[1,1]= sns.histplot(df["TP_ESCOLA"], binwidth=1, ax=axs[1,1], color='yellow')
-            axs[1,1].set_title('Distribuição do Tipo de Escola', fontsize=10);
-            axs[1,1].set_xticklabels(axs[1,1].get_xticks(), fontsize=8);
-            axs[1,1].set_xticklabels(['Não respondeu','Privada', 'Pública'], rotation=0, fontsize=8);
-            axs[1,1].set_xlabel("Tipo de Escola no EM", fontsize=10);
-            axs[1,1].set_yticklabels(axs[1,1].get_yticks(), fontsize=8);
-            axs[1,1].set_ylabel("Quantidade", fontsize=10);
-            
-            st.pyplot(fig2)
+            hist = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
+            # Posição dos xticks vai ser o limite direito da barra 
+            # mais metade de seu comprimento
+            xticks = [rec.get_x() + 0.5*hist.patches[0].get_width() for rec in list(hist.patches)]
+
+            plt.xticks(xticks, rotation=90, fontsize=8)
+            plt.yticks(fontsize=8)
+            plt.xlabel('Idades (anos)', fontsize=8)
+            plt.ylabel('Quantidade', fontsize=8)
+            plt.title("Distribuição da Faixa Etária", fontsize=8)
+            st.pyplot(hist)
             
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
