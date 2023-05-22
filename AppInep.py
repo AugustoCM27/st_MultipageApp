@@ -62,13 +62,15 @@ with tab_analise1:
         if radio_analise == 'Estatísticas das competências':
             ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
                                ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
-            df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}_spt2.zip', compression='zip', delimiter=';')
+            df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')
             st.write(df[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
             
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
-            df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
-
+            #df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
+                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')
             # Dicionário de mapeamento das categorias para intervalos
             faixas_etarias = {
                 1: '-17',2: '17',3: '18',4: '19',5: '20',6: '21',7: '22',8: '23',9: '24',10: '25',11: '26-30',
@@ -127,8 +129,10 @@ with tab_analise1:
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
             st.text('Adicionar os mapas e comentários/conclusões')
-            
-            df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
+            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
+                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')            
+            #df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             UFs = df["SG_UF_PROVA"].unique()
             variables = {"TP_ENSINO": 2,  # Educação especial
             "TP_ESCOLA": 3,  #Escola privada
@@ -208,7 +212,7 @@ with tab_analise1:
     elif sprint == 'Sprint 2':
         st.write('Adicionar os gráficos e análises do Sprint 2')
         def df_unzip(ano):
-            df = pd.read_csv(f'MICRODADOS_ENEM_{ano}_spt2.zip', compression='zip', delimiter=';')
+            df = pd.read_csv(f'MICRODADOS_ENEM_{ano}.zip', compression='zip', delimiter=';')
             return df
         
         df2014 = df_unzip(2014)
