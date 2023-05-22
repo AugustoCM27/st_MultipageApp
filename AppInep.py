@@ -86,18 +86,44 @@ with tab_analise1:
             df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
             
             hist = plt.figure()
-            sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
-            # Posição dos xticks vai ser o limite direito da barra 
-            # mais metade de seu comprimento
-            xticks = [rec.get_x() + 0.5*hist.patches[0].get_width() for rec in list(hist.patches)]
-
-            plt.xticks(xticks, rotation=90, fontsize=8)
-            plt.yticks(fontsize=8)
-            plt.xlabel('Idades (anos)', fontsize=8)
-            plt.ylabel('Quantidade', fontsize=8)
-            plt.title("Distribuição da Faixa Etária", fontsize=8)
-            st.pyplot(hist)
-            
+            histograma = st.radio("Qual distribuição você deseja visualizar?",
+                                  ['Faixa Etária', 'Nacionalidade', 'Cor/Raça', 'Tipo de Escola'])
+            if histograma == 'Faixa Etária':
+                sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1)
+                # Posição dos xticks vai ser o limite direito da barra 
+                # mais metade de seu comprimento
+                xticks = [rec.get_x() + 0.5*hist.patches[0].get_width() for rec in list(hist.patches)]
+                plt.xticks(xticks, rotation=90, fontsize=8)
+                plt.yticks(fontsize=8)
+                plt.xlabel('Idades (anos)', fontsize=8)
+                plt.ylabel('Quantidade', fontsize=8)
+                plt.title("Distribuição da Faixa Etária", fontsize=8)
+                st.pyplot(hist)
+            elif histograma == 'Nacionalidade':
+                sns.histplot(df.loc[df["TP_NACIONALIDADE"]!='Brasileiro(a)', "TP_NACIONALIDADE"], binwidth=1)
+                plt.xticks(rotation=10, fontsize=5)
+                plt.yticks(fontsize=8)
+                plt.xlabel('Situação', fontsize=8)
+                plt.ylabel('Quantidade', fontsize=8)
+                plt.title("Distribuição da Nacionalidade sem Brasileiros Nascidos", fontsize=8)
+                st.pyplot(hist)
+            elif histograma == 'Cor/Raça':
+                sns.histplot(df["TP_COR_RACA"], binwidth=1)
+                plt.xticks(rotation=0, fontsize=8)
+                plt.yticks(fontsize=8)
+                plt.xlabel('Cor / Raça', fontsize=8)
+                plt.ylabel('Quantidade', fontsize=8)
+                plt.title("Distribuição da Cor/Raça", fontsize=8)
+                st.pyplot(hist)
+             elif histograma == 'Tipo de Escola':
+                sns.histplot(df['TP_ESCOLA'])
+                plt.xticks(rotation=0, fontsize=8)
+                plt.yticks(fontsize=8)
+                plt.xlabel('Tipo de escola', fontsize=8)
+                plt.ylabel('Quantidade', fontsize=8)
+                plt.title("Distribuição da Tipo de Escola", fontsize=8)
+                st.pyplot(hist)
+                
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
             st.text('Adicionar os mapas e comentários/conclusões')
