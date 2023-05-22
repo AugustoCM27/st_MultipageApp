@@ -86,7 +86,7 @@ with tab_analise1:
             df['TP_ESCOLA'] = df['TP_ESCOLA'].map(escolas)
             
             # Criando subplots para as distribuições
-            fig, axs = plt.subplots(2, 2, layout="constrained", figsize=(20,20))
+            fig1, axs = plt.subplots(1, 2, layout="constrained", figsize=(20,20))
             # ----------------------- Distribuição da Faixa Etária -----------------------
             axs[0,0] = sns.histplot(sorted(df["TP_FAIXA_ETARIA"]), stat='count', binwidth=1, ax=axs[0,0], color='blue');
             axs[0,0].set_title('Distribuição da Faixa Etária', fontsize=10);
@@ -104,6 +104,11 @@ with tab_analise1:
             axs[0,1].set_xlabel("Situação", fontsize=10);
             axs[0,1].set_yticklabels(axs[0,1].get_yticks(), fontsize=8);
             axs[0,1].set_ylabel("Quantidade", fontsize=10);
+            
+            st.pyplot(fig1)
+            
+            # Criando subplots para as distribuições
+            fig2, axs = plt.subplots(1, 2, layout="constrained", figsize=(20,20))
             # ----------------------- Distribuição da Cor/Raça -----------------------
             axs[1,0]= sns.histplot(df["TP_COR_RACA"], binwidth=1, ax=axs[1,0], color='red')
             axs[1,0].set_title('Distribuição da Cor/Raça', fontsize=10);
@@ -121,7 +126,7 @@ with tab_analise1:
             axs[1,1].set_yticklabels(axs[1,1].get_yticks(), fontsize=8);
             axs[1,1].set_ylabel("Quantidade", fontsize=10);
             
-            st.pyplot(fig)
+            st.pyplot(fig2)
             
             st.text('Adicionar link do colab')
         elif radio_analise == 'Análises por UF (Mapas)':
