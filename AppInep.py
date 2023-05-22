@@ -115,7 +115,7 @@ with tab_analise1:
                 plt.ylabel('Quantidade', fontsize=8)
                 plt.title("Distribuição da Cor/Raça", fontsize=8)
                 st.pyplot(hist)
-             elif histograma == 'Tipo de Escola':
+            elif histograma == 'Tipo de Escola':
                 sns.histplot(df['TP_ESCOLA'])
                 plt.xticks(rotation=0, fontsize=8)
                 plt.yticks(fontsize=8)
