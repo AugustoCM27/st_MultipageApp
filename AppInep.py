@@ -410,102 +410,39 @@ with tab_analise:
             df[colunas_converter] = df[colunas_converter].astype(str)
             return df
         
-        df2022 = df_unzip_convert(2022)
-        df2021 = df_unzip_convert(2021)
-        df2020 = df_unzip_convert(2020)
-        df2019 = df_unzip_convert(2019)
-        df2018 = df_unzip_convert(2018)
-        df2017 = df_unzip_convert(2017)
-        df2016 = df_unzip_convert(2016)
-        df2015 = df_unzip_convert(2015)
-        df2014 = df_unzip_convert(2014)
-
-        def f(df, y, z):
-            CN = df['NU_NOTA_CN'].groupby(df[y])
-            df_cn = pd.DataFrame(CN.mean())
-            hist_cn = plt.figure(figsize=(10, 10))
-            sns.histplot(x=df_cn.index, weights=df_cn['NU_NOTA_CN'], legend=True, binwidth=1, hue=df_cn.index,
-                         palette='gist_ncar')  # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
-            plt.ylim(min(df_cn['NU_NOTA_CN']) - 50,
-                     max(df_cn['NU_NOTA_CN']) + 50)  # fiz isso apenas pra deixar todos numa escala igual
-            plt.title('Ciências Naturais')
-            plt.legend(title='Legenda', labels=z)
-
-            CH = df['NU_NOTA_CH'].groupby(df[y])
-            df_ch = pd.DataFrame(CH.mean())
-            hist_ch = plt.figure(figsize=(10, 10))
-            sns.histplot(x=df_ch.index, weights=df_ch['NU_NOTA_CH'], legend=True, binwidth=1, hue=df_ch.index,
-                         palette='gist_ncar')
-            plt.title('Ciências Humanas')
-            plt.ylim(min(df_cn['NU_NOTA_CN']) - 50, max(df_cn['NU_NOTA_CN']) + 150)
-            plt.legend(title='Legenda', labels=z)
-
-            MT = df['NU_NOTA_MT'].groupby(df[y])
-            df_mt = pd.DataFrame(MT.mean())
-            hist_mt = plt.figure(figsize=(10, 10))
-            sns.histplot(x=df_mt.index, weights=df_mt['NU_NOTA_MT'], legend=True, binwidth=1, hue=df_mt.index,
-                         palette='gist_ncar')
-            plt.title('Matemática')
-            plt.ylim(min(df_cn['NU_NOTA_CN']) - 50, max(df_cn['NU_NOTA_CN']) + 150)
-            plt.legend(title='Legenda', labels=z)
-
-            LC = df['NU_NOTA_LC'].groupby(df[y])
-            df_lc = pd.DataFrame(LC.mean())
-            hist_lc = plt.figure(figsize=(10, 10))
-            sns.histplot(x=df_lc.index, weights=df_lc['NU_NOTA_LC'], legend=True, binwidth=1, hue=df_lc.index,
-                         palette='gist_ncar')
-            plt.title('Linguagens e Código')
-            plt.ylim(min(df_cn['NU_NOTA_CN']) - 50, max(df_cn['NU_NOTA_CN']) + 150)
-            plt.legend(title='Legenda', labels=z)
-
-            RED = df['NU_NOTA_REDACAO'].groupby(df[y])
-            df_red = pd.DataFrame(RED.mean())
-            hist_red = plt.figure(figsize=(10, 10))
-            sns.histplot(x=df_red.index, weights=df_red['NU_NOTA_REDACAO'], legend=True, binwidth=1, hue=df_red.index,
-                         palette='gist_ncar')
-            plt.title('Redação')
-            plt.ylim(min(df_cn['NU_NOTA_CN']) - 50, max(df_cn['NU_NOTA_CN']) + 150)
-            plt.legend(title='Legenda', labels=z)
-
-            return [hist_cn, hist_ch, hist_lc, hist_mt, hist_red]
+        ano = st.selectbox('Selecione um ano', ['2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014'])
         
-        # Definindo as legendas
-        leg_Sexo = ['Masculino', 'Feminino']
-        leg_Cor = ['Não declarado', 'Branca', 'Preta', 'Parda', 'Amarela', 'Indígena']
-        leg_Nacionalidade = ['Não informada', 'Brasileiro', 'Brasileiro naturalizado', 'Estrangeiro',
-                             'Brasileiro nascido no exterior']
-        leg_EstadoCivil = ['Não informado', 'Solteiro', 'Casado', 'Divorciado', 'Viúvo']
-        leg_tp_escola = ['Não respondeu', 'Pública', 'Privada', 'Exterior']
-        leg_Faixa_etária = ['menor de 17', '17', '18', '19', '20', '21', '22', '23', '24', '25', 'entre 26-30', 'entre 31-35',
-                            'entre 36-40', 'entre 41-45', 'entre 46-50', 'entre 51-55', 'entre 56-60', 'entre 61-66',
-                            'entre 66-70', 'maior que 70'] 
+        df = df_unzip_convert(ano)
         
-        # Criar o filtro de anos
-        anos = ['2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014']
-        ano_selecionado = st.selectbox('Selecione um ano', anos)
+        def distrib(df, competencia, param):
+          x = df[competencia].groupby(df[param])
+          df_x = pd.DataFrame(x.mean())
+          # Definindo as legendas
+          leg_Sexo = ['Masculino', 'Feminino']
+          leg_Cor = ['Não declarado', 'Branca', 'Preta', 'Parda', 'Amarela', 'Indígena']
+          leg_Nacionalidade = ['Não informada', 'Brasileiro', 'Brasileiro naturalizado', 'Estrangeiro','Brasileiro nascido no exterior']
+          leg_EstadoCivil = ['Não informado', 'Solteiro', 'Casado', 'Divorciado', 'Viúvo']
+          leg_tp_escola = ['Não respondeu', 'Pública', 'Privada', 'Exterior']
+          leg_Faixa_etária = ['menor de 17', '17', '18', '19', '20', '21', '22', '23', '24', '25', 'entre 26-30', 'entre 31-35',
+                                'entre 36-40', 'entre 41-45', 'entre 46-50', 'entre 51-55', 'entre 56-60', 'entre 61-66',
+                                'entre 66-70', 'maior que 70']
+          parametros = {'TP_SEXO':leg_Sexo, 
+                        'TP_COR_RACA':leg_Cor,
+                        'TP_FAIXA_ETARIA':leg_Faixa_etária,
+                        'TP_ESTADO_CIVIL':leg_EstadoCivil,
+                        'TP_NACIONALIDADE':leg_Nacionalidade,
+                        'TP_ESCOLA':leg_tp_escola}
 
-        # Criar o filtro de critérios
-        criterios = ['Sexo', 'Faixa Etária', 'Estado Civil', 'Cor/Raça', 'Nacionalidade', 'Tipo de Escola']
-        criterio_selecionado = st.selectbox('Selecione um critério', criterios)
-
-        lista1 = [df2022, df2021, df2020, df2019, df2018, df2017, df2016, df2015, df2014]
-        lista = []
-        for i in anos:
-            if i == str(ano_selecionado):
-                lista_sexo = f(lista1[anos.index(i)], 'TP_SEXO', leg_Sexo)
-                lista_idade = f(lista1[anos.index(i)], 'TP_FAIXA_ETARIA', leg_Faixa_etária)
-                lista_estado_civil = f(lista1[anos.index(i)], 'TP_ESTADO_CIVIL', leg_EstadoCivil)
-                lista_cor = f(lista1[anos.index(i)], 'TP_COR_RACA', leg_Cor)
-                lista_nacionalidade = f(lista1[anos.index(i)], 'TP_NACIONALIDADE', leg_Nacionalidade)
-                lista_escola = f(lista1[anos.index(i)], 'TP_ESCOLA', leg_tp_escola)
-                lista = [lista_sexo, lista_idade, lista_estado_civil, lista_cor, lista_nacionalidade, lista_escola]
-
-                for k in criterios:
-                    if k == criterio_selecionado:
-                        for w in range(0, 5):
-                            st.pyplot(fig=lista[criterios.index(k)][w])
-            else:
-                pass
+          hist_x = sns.histplot(x=df_x.index, weights=df_x[competencia], legend=True, binwidth=1, hue=df_x.index,
+                       palette='gist_ncar')  # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
+          plt.legend(title='Legenda', labels=parametros[param])
+          return hist_x
+        
+        competencia = st.selectbox('Qual competência você deseja visualizar?',
+                                   ['NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC', 'NU_NOTA_MT', 'NU_NOTA_REDACAO'])
+        param = st.selectbox("Qual atributo você quer ver?",
+                             ['TP_SEXO', 'TP_COR_RACA', 'TP_FAIXA_ETARIA', 'TP_ESTADO_CIVIL', 'TP_NACIONALIDADE', 'TP_ESCOLA'])
+        st.pyplot(distrib(df, competencia, param))
         
 with tab_contato:
     st.title("Contato")
