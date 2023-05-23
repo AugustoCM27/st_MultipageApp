@@ -442,7 +442,7 @@ with tab_analise:
           return hist_x
         
         competencia = st.selectbox('Qual competência você deseja visualizar?',
-                                   ['NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC', 'NU_NOTA_MT', 'NU_NOTA_REDACAO'])
+                                   ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Código', 'Matemática', 'Redação'])
         param = st.selectbox("Qual atributo você quer ver?",
                              ['TP_SEXO', 'TP_COR_RACA', 'TP_FAIXA_ETARIA', 'TP_ESTADO_CIVIL', 'TP_NACIONALIDADE', 'TP_ESCOLA'])
         st.pyplot(distrib(df, competencia, param))
