@@ -369,6 +369,7 @@ with tab_analise1:
                 st.plotly_chart(fig_lc)
             elif escolha_radio == 'Ciências da Natureza':
                 st.plotly_chart(fig_cn)
+                
         if escolha_spt2 == "Média das notas por região do Brasil":
             ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
                                ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
@@ -398,7 +399,7 @@ with tab_analise1:
               # Exibindo o gráfico
               return fig
             
-            st.plotly_chart(fig_plot(media_reg(df_ano), ano)) 
+            st.plotly_chart(fig_plot(media_reg(df_ano), int(ano))) 
            
     elif sprint == 'Sprint 3':
         st.write('Adicionar os gráficos e análises do Sprint 3')
