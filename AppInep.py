@@ -370,11 +370,39 @@ with tab_analise1:
             elif escolha_radio == 'Ciências da Natureza':
                 st.plotly_chart(fig_cn)
         if escolha_spt2 == "Média das notas por região do Brasil":
-            st.write("oi")                        
-                                
+            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
+                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            df_ano = df_unzip(ano)
+            df_ano = df_addreg(df_ano)
+   
+            #Adicionando a coluna de regiao
+            def media_reg(df):
+              media_regiao = df.groupby('Região').mean()
+              # Criando uma nova coluna com a soma das notas
+              media_regiao['Soma'] = media_regiao['NU_NOTA_CN'] + media_regiao['NU_NOTA_CH'] + media_regiao['NU_NOTA_LC'] + media_regiao['NU_NOTA_MT'] + media_regiao['NU_NOTA_REDACAO']
+              return media_regiao
+
+            def fig_plot(media_regiao, ano):
+              fig = go.Figure()
+              # Adicionando traços de barra para cada disciplina
+              fig.add_trace(go.Bar(x=media_regiao.index, y=media_regiao['NU_NOTA_CN'], name='Ciências da Natureza'))
+              fig.add_trace(go.Bar(x=media_regiao.index, y=media_regiao['NU_NOTA_CH'], name='Ciências Humanas'))
+              fig.add_trace(go.Bar(x=media_regiao.index, y=media_regiao['NU_NOTA_LC'], name='Linguagens e Códigos'))
+              fig.add_trace(go.Bar(x=media_regiao.index, y=media_regiao['NU_NOTA_MT'], name='Matemática'))
+              fig.add_trace(go.Bar(x=media_regiao.index, y=media_regiao['NU_NOTA_REDACAO'], name='Redação'))
+              # Adicionando um trace de linha com a soma das notas
+              fig.add_trace(go.Scatter(x=media_regiao.index, y=media_regiao['Soma'], name='Soma das notas'))
+              # Configurando layout do gráfico
+              fig.update_layout(barmode='stack', title=f'Média das notas do ENEM {ano} por região',
+                                xaxis_title='Região', yaxis_title='Média das notas')
+              # Exibindo o gráfico
+              return fig
+            
+            st.plotly_chart(fig_plot(media_reg(df_ano), ano)) 
+           
     elif sprint == 'Sprint 3':
         st.write('Adicionar os gráficos e análises do Sprint 3')
-        
+
 with tab_analise2:
     st.title("Análises e Gráficos")
 
