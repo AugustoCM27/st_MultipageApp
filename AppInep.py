@@ -372,7 +372,7 @@ with tab_analise1:
         if escolha_spt2 == "Média das notas por região do Brasil":
             ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
                                ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
-            df_ano = df_unzip(ano)
+            df_ano = df_unzip(int(ano))
             df_ano = df_addreg(df_ano)
    
             #Adicionando a coluna de regiao
