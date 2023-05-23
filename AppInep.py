@@ -415,7 +415,7 @@ with tab_analise:
         df = df_unzip_convert(ano)
         # edição bia 
         df = df.rename(columns={'NU_NOTA_CN': 'Ciências da Natureza', 'NU_NOTA_CH': 'Ciências Humanas', 'NU_NOTA_LC': 'Linguagens e Códigos', 'NU_NOTA_MT': 'Matemática', 'NU_NOTA_REDACAO': 'Redação'})
-        
+        df = df.rename(columns={'TP_SEXO':'Sexo', 'TP_COR_RACA':'Cor/Raça', 'TP_FAIXA_ETARIA':'Faixa Etária', 'TP_ESTADO_CIVIL':'Estado Civil', 'TP_NACIONALIDADE':'Nacionalidade','TP_ESCOLA':'Tipo de Escola'}
         def distrib(df, competencia, param):
           x = df[competencia].groupby(df[param])
           df_x = pd.DataFrame(x.mean())
@@ -442,9 +442,9 @@ with tab_analise:
           return hist_x
         
         competencia = st.selectbox('Qual competência você deseja visualizar?',
-                                   ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Código', 'Matemática', 'Redação'])
+                                   ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Códigos', 'Matemática', 'Redação'])
         param = st.selectbox("Qual atributo você quer ver?",
-                             ['TP_SEXO', 'TP_COR_RACA', 'TP_FAIXA_ETARIA', 'TP_ESTADO_CIVIL', 'TP_NACIONALIDADE', 'TP_ESCOLA'])
+                             ['Sexo', 'Cor/Raça', 'Faixa Etária', 'Estado Civil', 'Nacionalidade', 'Tipo de Escola'])
         st.pyplot(distrib(df, competencia, param))
         
 with tab_contato:
