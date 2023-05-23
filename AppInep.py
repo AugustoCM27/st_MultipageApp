@@ -374,7 +374,7 @@ with tab_analise1:
             ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
                                ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
             df_ano = df_unzip(int(ano))
-            df_ano = df_addreg(df_ano)
+            df_ = df_addreg(df_ano)
    
             #Adicionando a coluna de regiao
             def media_reg(df):
@@ -398,8 +398,9 @@ with tab_analise1:
                                 xaxis_title='Região', yaxis_title='Média das notas')
               # Exibindo o gráfico
               return fig
-            
-            st.plotly_chart(fig_plot(media_reg(df_ano), int(ano))) 
+        
+            media_regiao = media_reg(df_)
+            st.plotly_chart(fig_plot(media_regiao, int(ano))) 
            
     elif sprint == 'Sprint 3':
         st.write('Adicionar os gráficos e análises do Sprint 3')
