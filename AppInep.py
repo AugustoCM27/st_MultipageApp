@@ -432,8 +432,9 @@ with tab_analise:
                         'TP_ESTADO_CIVIL':leg_EstadoCivil,
                         'TP_NACIONALIDADE':leg_Nacionalidade,
                         'TP_ESCOLA':leg_tp_escola}
-
-          hist_x = sns.histplot(x=df_x.index, weights=df_x[competencia], legend=True, binwidth=1, hue=df_x.index,
+            
+          hist_x = plt.figure() 
+          sns.histplot(x=df_x.index, weights=df_x[competencia], legend=True, binwidth=1, hue=df_x.index,
                        palette='gist_ncar')  # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
           plt.legend(title='Legenda', labels=parametros[param])
           return hist_x
