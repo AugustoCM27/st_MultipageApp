@@ -59,8 +59,7 @@ with tab_analise:
                                   'Análises por UF (Mapas)'))
         
         if radio_analise == 'Estatísticas das competências':
-            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
-                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            ano = st.slider("Qual ano você deseja visualizar as estatísticas das competências?", 2014, 2022)
             df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')
             st.write(df[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
             
