@@ -429,12 +429,12 @@ with tab_analise:
           leg_Faixa_etária = ['menor de 17', '17', '18', '19', '20', '21', '22', '23', '24', '25', 'entre 26-30', 'entre 31-35',
                                 'entre 36-40', 'entre 41-45', 'entre 46-50', 'entre 51-55', 'entre 56-60', 'entre 61-66',
                                 'entre 66-70', 'maior que 70']
-          parametros = {'TP_SEXO':leg_Sexo, 
-                        'TP_COR_RACA':leg_Cor,
-                        'TP_FAIXA_ETARIA':leg_Faixa_etária,
-                        'TP_ESTADO_CIVIL':leg_EstadoCivil,
-                        'TP_NACIONALIDADE':leg_Nacionalidade,
-                        'TP_ESCOLA':leg_tp_escola}
+          parametros = {'Sexo':leg_Sexo, 
+                        'Cor/Raça':leg_Cor,
+                        'Faixa Etária':leg_Faixa_etária,
+                        'Estado Civil':leg_EstadoCivil,
+                        'Nacionalidade':leg_Nacionalidade,
+                        'Tipo de Escola':leg_tp_escola}
             
           hist_x = plt.figure() 
           sns.histplot(x=df_x.index, weights=df_x[competencia], legend=True, binwidth=1, hue=df_x.index,
