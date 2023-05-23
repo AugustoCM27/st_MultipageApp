@@ -66,8 +66,7 @@ with tab_analise:
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
             st.text('Adicionar os histogramas e comentários/conclusões')
             #df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
-            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
-                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            ano = st.slider("Qual ano você deseja visualizar as distribuições?", 2014, 2022)
             df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')
             # Dicionário de mapeamento das categorias para intervalos
             faixas_etarias = {
@@ -369,8 +368,7 @@ with tab_analise:
                 st.plotly_chart(fig_cn)
                 
         if escolha_spt2 == "Média das notas por região do Brasil":
-            ano = st.selectbox("Qual ano você deseja visualizar?",
-                               ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
+            ano = st.slider("Qual ano você deseja visualizar?", 2014, 2022)
             df_ano = df_unzip(int(ano))
             df_ = df_addreg(df_ano)
    
