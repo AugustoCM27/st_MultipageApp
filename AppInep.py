@@ -439,7 +439,7 @@ with tab_analise:
           hist_x = plt.figure() 
           sns.histplot(x=df_x.index, weights=df_x[competencia], legend=True, binwidth=1, hue=df_x.index,
                        palette='gist_ncar')  # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
-          plt.legend(title='Legenda', labels=parametros[param])
+          plt.legend(title='Legenda', labels=parametros[param], loc='center left', bbox_to_anchor=(1, 0.5))
           return hist_x
         
         competencia = st.selectbox('Qual competência você deseja visualizar?',
