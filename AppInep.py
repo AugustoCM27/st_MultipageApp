@@ -413,6 +413,8 @@ with tab_analise:
         ano = st.selectbox('Selecione um ano', ['2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014'])
         
         df = df_unzip_convert(ano)
+        # edição bia 
+        df = df.rename(columns={'NU_NOTA_CN': 'Ciências da Natureza', 'NU_NOTA_CH': 'Ciências Humanas', 'NU_NOTA_LC': 'Linguagens e Códigos', 'NU_NOTA_MT': 'Matemática', 'NU_NOTA_REDACAO': 'Redação'})
         
         def distrib(df, competencia, param):
           x = df[competencia].groupby(df[param])
