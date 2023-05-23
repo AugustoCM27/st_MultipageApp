@@ -371,14 +371,14 @@ with tab_analise1:
                 st.plotly_chart(fig_cn)
                 
         if escolha_spt2 == "Média das notas por região do Brasil":
-            ano = st.selectbox("Qual ano você deseja visualizar as estatísticas das competências?",
+            ano = st.selectbox("Qual ano você deseja visualizar?",
                                ['2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'])
             df_ano = df_unzip(int(ano))
             df_ = df_addreg(df_ano)
    
             #Adicionando a coluna de regiao
             def media_reg(df):
-              media_regiao = df.groupby('Região').mean()
+              media_regiao = df.groupby('Região').mean(numeric_only=True)
               # Criando uma nova coluna com a soma das notas
               media_regiao['Soma'] = media_regiao['NU_NOTA_CN'] + media_regiao['NU_NOTA_CH'] + media_regiao['NU_NOTA_LC'] + media_regiao['NU_NOTA_MT'] + media_regiao['NU_NOTA_REDACAO']
               return media_regiao
