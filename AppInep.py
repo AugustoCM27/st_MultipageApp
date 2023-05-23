@@ -410,7 +410,8 @@ with tab_analise:
             df[colunas_converter] = df[colunas_converter].astype(str)
             return df
         
-        ano = st.selectbox('Selecione um ano', ['2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014'])
+        #ano = st.selectbox('Selecione um ano', ['2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014'])
+        ano = st.slider("Selecione um ano", 2014, 2022)
         
         df = df_unzip_convert(ano)
         
