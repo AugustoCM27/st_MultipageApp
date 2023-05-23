@@ -481,7 +481,7 @@ with tab_analise:
                             'entre 66-70', 'maior que 70'] 
         
         # Criar o filtro de anos
-        anos = ['2022', '2021', '2020', '2019', '2018', '2017', 2016', '2015', '2014']
+        anos = ['2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015', '2014']
         ano_selecionado = st.selectbox('Selecione um ano', anos)
 
         # Criar o filtro de critérios
