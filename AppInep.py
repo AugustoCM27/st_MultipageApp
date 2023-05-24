@@ -222,8 +222,8 @@ with tab_analise:
               df_comp = pd.DataFrame(c.mean()) # criando um data frame com a média da competência em cada um dos estados
               hist_comp = plt.figure(figsize=(10,10))
               df_comp_sorted = df_comp.sort_values(by='NU_NOTA_'+str(comp), ascending=True)
-              hist_comp = sns.histplot(x = df_comp_sorted.index, weights = df_comp_sorted['NU_NOTA_'+str(comp)], legend = False, binwidth = 1, hue = df_cn.index, palette = 'gist_ncar') # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
-              plt.ylim(min(df_cn['NU_NOTA_CN'])-50, max(df_cn['NU_NOTA_CN'])+170) # fiz isso apenas pra deixar todos numa escala igual
+              sns.histplot(x = df_comp_sorted.index, weights = df_comp_sorted['NU_NOTA_'+str(comp)], legend = False, binwidth = 1, hue = df_cn.index, palette = 'gist_ncar') # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
+              plt.ylim(min(df_cn[f'NU_NOTA_{comp}'])-50, max(df_cn[f'NU_NOTA_{comp}'])+170) # fiz isso apenas pra deixar todos numa escala igual
               plt.xlabel('UF')
               plt.ylabel('Média da nota')
               plt.title(y)
@@ -237,7 +237,7 @@ with tab_analise:
             elif escolha_radio == 'Linguagens e Códigos':
                 f('LC', escolha_radio)
             elif escolha_radio == 'Ciências da Natureza':
-                f('Cn', escolha_radio)
+                f('CN', escolha_radio)
           #fim da minha alteração
         
     elif sprint == 'Sprint 2':
