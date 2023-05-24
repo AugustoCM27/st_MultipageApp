@@ -227,6 +227,7 @@ with tab_analise:
               plt.xlabel('UF')
               plt.ylabel('Média da nota')
               plt.title(y)
+              return hist_comp
             
             if escolha_radio == 'Redação':
                 f('RED', escolha_radio)
