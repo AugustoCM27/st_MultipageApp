@@ -222,7 +222,7 @@ with tab_analise:
               df_comp = pd.DataFrame(c.mean()) # criando um data frame com a média da competência em cada um dos estados
               hist_comp = plt.figure(figsize=(10,10))
               df_comp_sorted = df_comp.sort_values(by='NU_NOTA_'+str(comp), ascending=True)
-              sns.histplot(x = df_comp_sorted.index, weights = df_comp_sorted['NU_NOTA_'+str(comp)], legend = False, binwidth = 1, hue = df_cn.index, palette = 'gist_ncar') # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
+              sns.histplot(x = df_comp_sorted.index, weights = df_comp_sorted['NU_NOTA_'+str(comp)], legend = False, binwidth = 1, hue = df_comp.index, palette = 'gist_ncar') # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
               plt.ylim(min(df_comp[f'NU_NOTA_{comp}'])-50, max(df_comp[f'NU_NOTA_{comp}'])+170) # fiz isso apenas pra deixar todos numa escala igual
               plt.xlabel('UF')
               plt.ylabel('Média da nota')
