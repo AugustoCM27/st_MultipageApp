@@ -57,7 +57,10 @@ with tab_analise:
         radio_analise = st.radio(f"*Qual análise do {sprint} você gostaria de ver?*",
                                  ('Estatísticas das competências',
                                   'Distribuições dos participantes (Histogramas)',
-                                  'Análises por UF (Mapas)'))
+                                  'Análises por UF (Mapas)',
+                                  'Nota média dos candidatos por região'))
+        
+        
         
         if radio_analise == 'Estatísticas das competências':
             ano = st.slider("Qual ano você deseja visualizar as estatísticas das competências?", 2014, 2022)
@@ -205,7 +208,37 @@ with tab_analise:
                 axs[row, col].axis("off");
             st.pyplot(fig)
             st.text('Adicionar link do colab')
+        
+        #edição bia - adicionei os histogramas lgbt
+        escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
+        elif radio_analise == 'Nota média dos candidatos por região'
+            escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
+            df = pd.read_csv('MICRODADOS_ENEM_2022_spt2.zip', compression='zip', delimiter=';')
+            CN = df['NU_NOTA_CN'].groupby(df['SG_UF_PROVA'])
+            df_cn = pd.DataFrame(CN.mean())
+            def f(comp, y):
+              c = df['NU_NOTA_'+str(comp)].groupby(df['SG_UF_PROVA'])
+              df_comp = pd.DataFrame(c.mean()) # criando um data frame com a média da competência em cada um dos estados
+              hist_comp = plt.figure(figsize=(10,10))
+              df_comp_sorted = df_comp.sort_values(by='NU_NOTA_'+str(comp), ascending=True)
+              hist_comp = sns.histplot(x = df_comp_sorted.index, weights = df_comp_sorted['NU_NOTA_'+str(comp)], legend = False, binwidth = 1, hue = df_cn.index, palette = 'gist_ncar') # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
+              plt.ylim(min(df_cn['NU_NOTA_CN'])-50, max(df_cn['NU_NOTA_CN'])+170) # fiz isso apenas pra deixar todos numa escala igual
+              plt.xlabel('UF')
+              plt.ylabel('Média da nota')
+              plt.title(y)
             
+            if escolha_radio == 'Redação':
+                f('RED', escolha_radio)
+            elif escolha_radio == 'Matemática':
+                f('MT', escolha_radio)
+            elif escolha_radio == 'Ciências Humanas':
+                f('CH', escolha_radio)
+            elif escolha_radio == 'Linguagens e Códigos':
+                f('LC', escolha_radio)
+            elif escolha_radio == 'Ciências da Natureza':
+                f('Cn', escolha_radio)
+          #fim da minha alteração
+        
     elif sprint == 'Sprint 2':
         st.write('Adicionar os gráficos e análises do Sprint 2')
         def df_unzip(ano):
