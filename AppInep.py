@@ -230,15 +230,15 @@ with tab_analise:
               return hist_comp
             
             if escolha_radio == 'Redação':
-                f('RED', escolha_radio)
+                st.pyplot(f('REDACAO', escolha_radio))
             elif escolha_radio == 'Matemática':
-                f('MT', escolha_radio)
+                st.pyplot(f('MT', escolha_radio))
             elif escolha_radio == 'Ciências Humanas':
-                f('CH', escolha_radio)
+                st.pyplot(f('CH', escolha_radio))
             elif escolha_radio == 'Linguagens e Códigos':
-                f('LC', escolha_radio)
+                st.pyplot(f('LC', escolha_radio))
             elif escolha_radio == 'Ciências da Natureza':
-                f('CN', escolha_radio)
+                st.pyplot(f('CN', escolha_radio))
           #fim da minha alteração
         
     elif sprint == 'Sprint 2':
