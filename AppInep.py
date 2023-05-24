@@ -215,8 +215,8 @@ with tab_analise:
             ano = st.slider("Qual ano você deseja visualizar as distribuições?", 2014, 2022)
             escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
             df = pd.read_csv(f'MICRODADOS_ENEM_{ano}_spt2.zip', compression='zip', delimiter=';')
-            #CN = df['NU_NOTA_CN'].groupby(df['SG_UF_PROVA'])
-            #df_cn = pd.DataFrame(CN.mean())
+            CN = df['NU_NOTA_CN'].groupby(df['SG_UF_PROVA'])
+            df_cn = pd.DataFrame(CN.mean())
             def f(comp, y):
               c = df['NU_NOTA_'+str(comp)].groupby(df['SG_UF_PROVA'])
               df_comp = pd.DataFrame(c.mean()) # criando um data frame com a média da competência em cada um dos estados
