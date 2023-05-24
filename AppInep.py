@@ -215,15 +215,15 @@ with tab_analise:
             ano = st.slider("Qual ano você deseja visualizar as distribuições?", 2014, 2022)
             escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
             df = pd.read_csv(f'MICRODADOS_ENEM_{ano}_spt2.zip', compression='zip', delimiter=';')
-            CN = df['NU_NOTA_CN'].groupby(df['SG_UF_PROVA'])
-            df_cn = pd.DataFrame(CN.mean())
+            #CN = df['NU_NOTA_CN'].groupby(df['SG_UF_PROVA'])
+            #df_cn = pd.DataFrame(CN.mean())
             def f(comp, y):
               c = df['NU_NOTA_'+str(comp)].groupby(df['SG_UF_PROVA'])
               df_comp = pd.DataFrame(c.mean()) # criando um data frame com a média da competência em cada um dos estados
               hist_comp = plt.figure(figsize=(10,10))
               df_comp_sorted = df_comp.sort_values(by='NU_NOTA_'+str(comp), ascending=True)
               sns.histplot(x = df_comp_sorted.index, weights = df_comp_sorted['NU_NOTA_'+str(comp)], legend = False, binwidth = 1, hue = df_cn.index, palette = 'gist_ncar') # fazendo um histograma, no qual, no eixo x são os estados, e no eixo y a média de notas
-              plt.ylim(min(df_cn[f'NU_NOTA_{comp}'])-50, max(df_cn[f'NU_NOTA_{comp}'])+170) # fiz isso apenas pra deixar todos numa escala igual
+              plt.ylim(min(df_comp[f'NU_NOTA_{comp}'])-50, max(df_comp[f'NU_NOTA_{comp}'])+170) # fiz isso apenas pra deixar todos numa escala igual
               plt.xlabel('UF')
               plt.ylabel('Média da nota')
               plt.title(y)
