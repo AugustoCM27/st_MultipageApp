@@ -16,12 +16,19 @@ import descartes
 
 # edição bia - teste mudança de cores
 # Read the contents of the styles.css file
-with open('styles.css', 'r') as f:
-    css = f.read()
+#with open('styles.css', 'r') as f:
+#    css = f.read()
 
 # Apply the custom CSS
-st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+#st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 # fim edição bia
+[theme]
+primaryColor="#F63366"
+backgroundColor="#FFFFFF"
+secondaryBackgroundColor="#F0F2F6"
+textColor="#262730"
+font="sans serif"
+
 
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
