@@ -13,15 +13,7 @@ import warnings
 from shapely.errors import ShapelyDeprecationWarning
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning);
 import descartes
-import os
-
-# Carrega o CSS personalizado
-def load_custom_css():
-    css_file = os.path.join("st_MultipageApp", "styles.css")
-    st.markdown(f'<link href="{css_file}" rel="stylesheet">', unsafe_allow_html=True)
-
-# Chama a função para carregar o CSS personalizado
-load_custom_css()
+#import os
 
 # edição bia - teste mudança de cores
 # Read the contents of the styles.css file
