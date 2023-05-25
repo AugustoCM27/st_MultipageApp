@@ -63,7 +63,6 @@ with tab_analise:
                           ['Sprint 1', 'Sprint 2', 'Sprint 3'])
 
     if sprint == 'Sprint 1':
-        st.write('Adicionar os gráficos e análises do Sprint 1')
         radio_analise = st.radio(f"*Qual análise do {sprint} você gostaria de ver?*",
                                  ('Estatísticas das competências',
                                   'Distribuições dos participantes (Histogramas)',
@@ -78,7 +77,6 @@ with tab_analise:
             st.write(df[["NU_NOTA_CN", "NU_NOTA_CH", "NU_NOTA_LC", "NU_NOTA_MT", "NU_NOTA_REDACAO"]].describe())
             
         elif radio_analise == 'Distribuições dos participantes (Histogramas)':
-            st.text('Adicionar os histogramas e comentários/conclusões')
             #df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             ano = st.slider("Qual ano você deseja visualizar as distribuições?", 2014, 2022)
             df = pd.read_csv(f'MICRODADOS_ENEM_{int(ano)}.zip', compression='zip', delimiter=';')
@@ -139,9 +137,7 @@ with tab_analise:
                 st.pyplot(hist)
                 
             st.text('Adicionar link do colab')
-        elif radio_analise == 'Análises por UF (Mapas)':
-            st.text('Adicionar os mapas e comentários/conclusões')
-            
+        elif radio_analise == 'Análises por UF (Mapas)':           
             df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             UFs = df["SG_UF_PROVA"].unique()
             variables = {"TP_ENSINO": 2,  # Educação especial
@@ -252,7 +248,6 @@ with tab_analise:
           #fim da minha alteração
         
     elif sprint == 'Sprint 2':
-        st.write('Adicionar os gráficos e análises do Sprint 2')
         def df_unzip(ano):
             df = pd.read_csv(f'MICRODADOS_ENEM_{ano}_spt2.zip', compression='zip', delimiter=';')
             return df
@@ -444,9 +439,7 @@ with tab_analise:
             media_regiao = media_reg(df_)
             st.plotly_chart(fig_plot(media_regiao, int(ano))) 
            
-    elif sprint == 'Sprint 3':
-        st.write('Adicionar os gráficos e análises do Sprint 3')
-        
+    elif sprint == 'Sprint 3':     
         def df_unzip_convert(ano):
             df = pd.read_csv(f'MICRODADOS_ENEM_{ano}.zip', compression='zip', delimiter=';')
             colunas_converter = ['TP_FAIXA_ETARIA', 'TP_ESTADO_CIVIL', 'TP_COR_RACA', 'TP_NACIONALIDADE', 'TP_ESCOLA']
