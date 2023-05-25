@@ -22,13 +22,6 @@ import descartes
 # Apply the custom CSS
 #st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 # fim edição bia
-[theme]
-primaryColor="#F63366"
-backgroundColor="#FFFFFF"
-secondaryBackgroundColor="#F0F2F6"
-textColor="#262730"
-font="sans serif"
-
 
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
