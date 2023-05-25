@@ -14,6 +14,15 @@ from shapely.errors import ShapelyDeprecationWarning
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning);
 import descartes
 
+# edição bia - teste mudança de cores
+# Read the contents of the styles.css file
+with open('styles.css', 'r') as f:
+    css = f.read()
+
+# Apply the custom CSS
+st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+# fim edição bia
+
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
     page_icon='🐼'
