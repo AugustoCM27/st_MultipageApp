@@ -55,9 +55,9 @@ with tab_analise:
 
     st.write("Esse espaço é reservado para as análises e gráficos feitos pela equipe do Projeto INEP")
     expander = st.expander('*Descrição das atividades de cada Sprint*')
-    expander.write('Sprint 1: Análise exploratória do ENEM 2022 (histogramas e mapas)')
-    expander.write('Sprint 2: Evolução temporal das notas por competência, para cada UF [2018-2022]')
-    expander.write('Sprint 3: Influência de aspectos sociais no desempenho no ENEM 2022')
+    expander.write('Sprint 1: Análise exploratória dos anos do ENEM [2014-2022]')
+    expander.write('Sprint 2: Evolução temporal das notas por competência, para cada UF [2014-2022] e Análise das notas por região do Brasil')
+    expander.write('Sprint 3: Influência de aspectos sociais no desempenho dos anos do ENEM [2014-2022]')
     
     sprint = st.selectbox('*Qual sprint você gostaria de visualizar?*',
                           ['Sprint 1', 'Sprint 2', 'Sprint 3'])
