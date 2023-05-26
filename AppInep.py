@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning);
 import descartes
 import folium
 import requests
-from streamlit_folium import st_folium
+from streamlit-folium import st_folium
 
 # edição bia - teste mudança de cores
 
