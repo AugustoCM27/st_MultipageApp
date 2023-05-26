@@ -17,11 +17,11 @@ import descartes
 
 # edição bia - teste mudança de cores
 
-def load_css(file_path):
-    with open(file_path) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+#def load_css(file_path):
+#    with open(file_path) as f:
+#        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-load_css('https://github.com/AugustoCM27/st_MultipageApp/tree/main/style.css')
+#load_css('https://github.com/AugustoCM27/st_MultipageApp/tree/main/style.css')
 
 # fim edição bia
 
