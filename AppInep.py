@@ -553,7 +553,11 @@ with tab_analise:
                                                                     'fillcolor':'#black','fillOpacity':0.9,'weight':0.8})) 
             map.add_child(fgp)
             map.add_child(folium.LayerControl())     
-    
+            # Definir os limites do mapa (área de exibição)
+            limites = [[-55, -90], [12, -30]]
+
+            # Ajustar os limites do mapa
+            map.fit_bounds(limites)
             st_folium(map)
             
     elif sprint == 'Sprint 3':     
