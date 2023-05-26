@@ -491,12 +491,11 @@ with tab_analise:
               codarea = state['properties']['codarea']
               # Busca do código de área no índice da linha da Tabela.
               if codarea in index:
-                #print(dfs.loc[codarea,'PRODUÇÃO'])
                 state['properties']['CN'] = float(m.loc[codarea,'CN'])
-                #state['properties']['CH'] = float(m.loc[codarea,'CH'])
-                #state['properties']['LC'] = float(m.loc[codarea,'LC'])
-                #state['properties']['MT'] = float(m.loc[codarea,'MT'])
-                #state['properties']['RED'] = float(m.loc[codarea,'RED'])
+                state['properties']['CH'] = float(m.loc[codarea,'CH'])
+                state['properties']['LC'] = float(m.loc[codarea,'LC'])
+                state['properties']['MT'] = float(m.loc[codarea,'MT'])
+                state['properties']['RED'] = float(m.loc[codarea,'RED'])
                 state['properties']['MEDIA_NOTAS'] = float(m.loc[codarea,'MEDIA_NOTAS'])    
                 state['properties']['UF'] = (m.loc[codarea,'UF'])            
             # escala de cores
@@ -541,10 +540,8 @@ with tab_analise:
             
             fgp = folium.FeatureGroup(name= 'Estados')
             tooltip=folium.features.GeoJsonTooltip(
-                      #fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
-                      fields=['UF','CN'],
-                      #aliases=['Estado:','CN', 'CH', 'LC', 'MT', 'RED'],
-                      aliases=['Estado:','CN'],
+                      fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
+                      aliases=['Estado:','CN', 'CH', 'LC', 'MT', 'RED'],
                       style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
               )
 
@@ -554,7 +551,7 @@ with tab_analise:
                                           style_function = lambda x:{'fillColor':colormap(x['properties']['MEDIA_NOTAS']),
                                                                     'fillcolor':'#black','fillOpacity':0.9,'weight':0.8})) 
             map.add_child(fgp)
-            map.add_child(folium.LayerControl())     
+            #map.add_child(folium.LayerControl())     
             st_folium(map)
             
     elif sprint == 'Sprint 3':     
