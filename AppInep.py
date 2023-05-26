@@ -493,10 +493,10 @@ with tab_analise:
               if codarea in index:
                 #print(dfs.loc[codarea,'PRODUÇÃO'])
                 state['properties']['CN'] = float(m.loc[codarea,'CN'])
-                state['properties']['CH'] = float(m.loc[codarea,'CH'])
-                state['properties']['LC'] = float(m.loc[codarea,'LC'])
-                state['properties']['MT'] = float(m.loc[codarea,'MT'])
-                state['properties']['RED'] = float(m.loc[codarea,'RED'])
+                #state['properties']['CH'] = float(m.loc[codarea,'CH'])
+                #state['properties']['LC'] = float(m.loc[codarea,'LC'])
+                #state['properties']['MT'] = float(m.loc[codarea,'MT'])
+                #state['properties']['RED'] = float(m.loc[codarea,'RED'])
                 state['properties']['MEDIA_NOTAS'] = float(m.loc[codarea,'MEDIA_NOTAS'])    
                 state['properties']['UF'] = (m.loc[codarea,'UF'])            
             # escala de cores
@@ -541,8 +541,10 @@ with tab_analise:
             
             fgp = folium.FeatureGroup(name= 'Estados')
             tooltip=folium.features.GeoJsonTooltip(
-                      fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
-                      aliases=['Estado:','CN', 'CH', 'LC', 'MT', 'RED'],
+                      #fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
+                      fields=['UF','CN'],
+                      #aliases=['Estado:','CN', 'CH', 'LC', 'MT', 'RED'],
+                      aliases=['Estado:','CN'],
                       style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
               )
 
@@ -553,11 +555,6 @@ with tab_analise:
                                                                     'fillcolor':'#black','fillOpacity':0.9,'weight':0.8})) 
             map.add_child(fgp)
             map.add_child(folium.LayerControl())     
-            # Definir os limites do mapa (área de exibição)
-            limites = [[-55, -90], [12, -30]]
-
-            # Ajustar os limites do mapa
-            map.fit_bounds(limites)
             st_folium(map)
             
     elif sprint == 'Sprint 3':     
