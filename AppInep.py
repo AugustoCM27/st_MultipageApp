@@ -428,131 +428,133 @@ with tab_analise:
             st.plotly_chart(fig_plot(media_regiao, int(ano)))
             
         if escolha_spt2 == "Mapas interativos":
-            import folium
-            import requests
-            from streamlit_folium import st_folium            
-            df = pd.read_csv("MICRODADOS_ENEM_2022_spt2.zip", compression='zip', delimiter=';')
+            st.write("[Link para o Colab com os mapas interativos + Bônus Pokémon](https://colab.research.google.com/drive/1lEryLGJuCyevzJ57ugjKGYUTyXXVO0Pp?usp=sharing)")
+            st.image("Mapa_Pokemon_Inep.jpg")
+#             import folium
+#             import requests
+#             from streamlit_folium import st_folium            
+#             df = pd.read_csv("MICRODADOS_ENEM_2022_spt2.zip", compression='zip', delimiter=';')
             
-            mapa_brasil = folium.Map(location=[-22.7864889,-50.6786708],zoom_start=4,
-                                       tiles='Stamen Toner')
-            headers = {
-                'Content-Type': 'application/json;charset=UTF-8',
-                'User-Agent': 'google-colab',
-                'Accept': 'application/json, text/plain, */*',
-                'Accept-Encoding': 'gzip, deflate, br',
-                'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
-                'Connection': 'keep-alive',
-            }
+#             mapa_brasil = folium.Map(location=[-22.7864889,-50.6786708],zoom_start=4,
+#                                        tiles='Stamen Toner')
+#             headers = {
+#                 'Content-Type': 'application/json;charset=UTF-8',
+#                 'User-Agent': 'google-colab',
+#                 'Accept': 'application/json, text/plain, */*',
+#                 'Accept-Encoding': 'gzip, deflate, br',
+#                 'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+#                 'Connection': 'keep-alive',
+#             }
 
-            url = "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&intrarregiao=UF" # pegando os dados das coordenadas de cada UF para montar o mapa
-            UF_jsons = requests.get(url,
-                                       headers=headers)
-            UF_json = UF_jsons.json()   
-            # associando a sigla de cada estado com o "codarea"
+#             url = "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo+json&intrarregiao=UF" # pegando os dados das coordenadas de cada UF para montar o mapa
+#             UF_jsons = requests.get(url,
+#                                        headers=headers)
+#             UF_json = UF_jsons.json()   
+#             # associando a sigla de cada estado com o "codarea"
 
-            def df_(df, competencia):
-              x = df[competencia].groupby(df['SG_UF_PROVA'])
-              df_x = pd.DataFrame(x.mean())
-              return df_x
+#             def df_(df, competencia):
+#               x = df[competencia].groupby(df['SG_UF_PROVA'])
+#               df_x = pd.DataFrame(x.mean())
+#               return df_x
 
-            df_ch = df_(df, 'NU_NOTA_CH')
-            df_red = df_(df, 'NU_NOTA_REDACAO')
-            df_cn = df_(df, 'NU_NOTA_CN')
-            df_lc = df_(df, 'NU_NOTA_LC')
-            df_mt = df_(df, 'NU_NOTA_MT')
+#             df_ch = df_(df, 'NU_NOTA_CH')
+#             df_red = df_(df, 'NU_NOTA_REDACAO')
+#             df_cn = df_(df, 'NU_NOTA_CN')
+#             df_lc = df_(df, 'NU_NOTA_LC')
+#             df_mt = df_(df, 'NU_NOTA_MT')
 
-            lista_ = []
-            estados = []
-            for i in df_red.index:
-              a = 'https://servicodados.ibge.gov.br/api/v3/malhas/estados/' + str(i) +'?formato=application/vnd.geo+json'
-              a_jsons = requests.get(a, headers=headers)
-              a_json = a_jsons.json()
-              d = a_json['features'][0]['properties']
-              lista_.append(d)
-              estados.append(i)
+#             lista_ = []
+#             estados = []
+#             for i in df_red.index:
+#               a = 'https://servicodados.ibge.gov.br/api/v3/malhas/estados/' + str(i) +'?formato=application/vnd.geo+json'
+#               a_jsons = requests.get(a, headers=headers)
+#               a_json = a_jsons.json()
+#               d = a_json['features'][0]['properties']
+#               lista_.append(d)
+#               estados.append(i)
 
-            df_cod = pd.DataFrame(lista_, index = estados)            
-            # juntando as informações de média de cada competência, com os estados e com 'codarea'
-            x = pd.concat([df_cn, df_ch, df_lc, df_mt, df_red], axis=1)
-            m = pd.merge(df_cod, x, how = 'inner', on = df_red.index)
-            m.index = df_cod['codarea']
-            m.drop('codarea', inplace=True, axis=1)
-            m.rename(columns={"key_0": "UF","NU_NOTA_CN": "CN", "NU_NOTA_CH": "CH", "NU_NOTA_LC": "LC", "NU_NOTA_MT": "MT", "NU_NOTA_REDACAO": "RED"}, inplace=True)
+#             df_cod = pd.DataFrame(lista_, index = estados)            
+#             # juntando as informações de média de cada competência, com os estados e com 'codarea'
+#             x = pd.concat([df_cn, df_ch, df_lc, df_mt, df_red], axis=1)
+#             m = pd.merge(df_cod, x, how = 'inner', on = df_red.index)
+#             m.index = df_cod['codarea']
+#             m.drop('codarea', inplace=True, axis=1)
+#             m.rename(columns={"key_0": "UF","NU_NOTA_CN": "CN", "NU_NOTA_CH": "CH", "NU_NOTA_LC": "LC", "NU_NOTA_MT": "MT", "NU_NOTA_REDACAO": "RED"}, inplace=True)
 
-            m['MEDIA_NOTAS'] = ((m['RED'] + m['CH'] + m['CN'] + m['MT'] + m['LC'])/5)
-            m = m.round(2)     
-            m2 = m.sort_values(by='codarea')
-            m2['num'] = range(0,27)
-            m2 = m2.round(2)  
-            # adicionando no UF_json as médias das notas de cada estado
-            index = m.index
-            for state in UF_json['features']:
-              # Converter de string para número (usado no índice da tabela com produção).
-              codarea = state['properties']['codarea']
-              # Busca do código de área no índice da linha da Tabela.
-              if codarea in index:
-                state['properties']['CN'] = float(m.loc[codarea,'CN'])
-                state['properties']['CH'] = float(m.loc[codarea,'CH'])
-                state['properties']['LC'] = float(m.loc[codarea,'LC'])
-                state['properties']['MT'] = float(m.loc[codarea,'MT'])
-                state['properties']['RED'] = float(m.loc[codarea,'RED'])
-                state['properties']['MEDIA_NOTAS'] = float(m.loc[codarea,'MEDIA_NOTAS'])    
-                state['properties']['UF'] = (m.loc[codarea,'UF'])            
-            # escala de cores
-            myscale = (m['MEDIA_NOTAS'].quantile((0,0.2,0.4,0.6,0.8,1))).tolist()
-            import branca.colormap as cm
-            colormap = cm.LinearColormap(colors=['darkred', 'darkmagenta','deeppink','darkblue','darkturquoise','darkgreen'], index=myscale,vmin=min(myscale),vmax=max(myscale))
+#             m['MEDIA_NOTAS'] = ((m['RED'] + m['CH'] + m['CN'] + m['MT'] + m['LC'])/5)
+#             m = m.round(2)     
+#             m2 = m.sort_values(by='codarea')
+#             m2['num'] = range(0,27)
+#             m2 = m2.round(2)  
+#             # adicionando no UF_json as médias das notas de cada estado
+#             index = m.index
+#             for state in UF_json['features']:
+#               # Converter de string para número (usado no índice da tabela com produção).
+#               codarea = state['properties']['codarea']
+#               # Busca do código de área no índice da linha da Tabela.
+#               if codarea in index:
+#                 state['properties']['CN'] = float(m.loc[codarea,'CN'])
+#                 state['properties']['CH'] = float(m.loc[codarea,'CH'])
+#                 state['properties']['LC'] = float(m.loc[codarea,'LC'])
+#                 state['properties']['MT'] = float(m.loc[codarea,'MT'])
+#                 state['properties']['RED'] = float(m.loc[codarea,'RED'])
+#                 state['properties']['MEDIA_NOTAS'] = float(m.loc[codarea,'MEDIA_NOTAS'])    
+#                 state['properties']['UF'] = (m.loc[codarea,'UF'])            
+#             # escala de cores
+#             myscale = (m['MEDIA_NOTAS'].quantile((0,0.2,0.4,0.6,0.8,1))).tolist()
+#             import branca.colormap as cm
+#             colormap = cm.LinearColormap(colors=['darkred', 'darkmagenta','deeppink','darkblue','darkturquoise','darkgreen'], index=myscale,vmin=min(myscale),vmax=max(myscale))
          
-            uf_coord = {
-                'AC': [-8.77, -70.55],
-                'AL': [-9.62, -36.82],
-                'AM': [-3.47, -65.10],
-                'AP': [1.41, -51.77],
-                'BA': [-13.29, -41.71],
-                'CE': [-5.20, -39.53],
-                'DF': [-15.83, -47.86],
-                'ES': [-19.19, -40.34],
-                'GO': [-15.98, -49.86],
-                'MA': [-5.42, -45.44],
-                'MT': [-12.64, -55.42],
-                'MS': [-20.51, -54.54],
-                'MG': [-18.10, -44.38],
-                'PA': [-3.79, -52.48],
-                'PB': [-7.28, -36.72],
-                'PR': [-24.89, -51.55],
-                'PE': [-8.38, -37.86],
-                'PI': [-6.60, -42.28],
-                'RJ': [-22.25, -42.66],
-                'RN': [-5.81, -36.59],
-                'RO': [-10.83, -63.34],
-                'RS': [-30.17, -53.50],
-                'RR': [1.99, -61.33],
-                'SC': [-27.45, -50.95],
-                'SE': [-10.57, -37.45],
-                'SP': [-22.19, -48.79],
-                'TO': [-9.46, -48.26]
-            }            
+#             uf_coord = {
+#                 'AC': [-8.77, -70.55],
+#                 'AL': [-9.62, -36.82],
+#                 'AM': [-3.47, -65.10],
+#                 'AP': [1.41, -51.77],
+#                 'BA': [-13.29, -41.71],
+#                 'CE': [-5.20, -39.53],
+#                 'DF': [-15.83, -47.86],
+#                 'ES': [-19.19, -40.34],
+#                 'GO': [-15.98, -49.86],
+#                 'MA': [-5.42, -45.44],
+#                 'MT': [-12.64, -55.42],
+#                 'MS': [-20.51, -54.54],
+#                 'MG': [-18.10, -44.38],
+#                 'PA': [-3.79, -52.48],
+#                 'PB': [-7.28, -36.72],
+#                 'PR': [-24.89, -51.55],
+#                 'PE': [-8.38, -37.86],
+#                 'PI': [-6.60, -42.28],
+#                 'RJ': [-22.25, -42.66],
+#                 'RN': [-5.81, -36.59],
+#                 'RO': [-10.83, -63.34],
+#                 'RS': [-30.17, -53.50],
+#                 'RR': [1.99, -61.33],
+#                 'SC': [-27.45, -50.95],
+#                 'SE': [-10.57, -37.45],
+#                 'SP': [-22.19, -48.79],
+#                 'TO': [-9.46, -48.26]
+#             }            
             
-            map = folium.Map(
-                location=[-13.089461610967666, -55.910299337040286], zoom_start = 6,
-                tiles='stamentoner'
-            ) 
+#             map = folium.Map(
+#                 location=[-13.089461610967666, -55.910299337040286], zoom_start = 6,
+#                 tiles='stamentoner'
+#             ) 
             
-            fgp = folium.FeatureGroup(name= 'Estados')
-            tooltip=folium.features.GeoJsonTooltip(
-                      fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
-                      aliases=['Estado:','CN', 'CH', 'LC', 'MT', 'RED'],
-                      style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
-              )
+#             fgp = folium.FeatureGroup(name= 'Estados')
+#             tooltip=folium.features.GeoJsonTooltip(
+#                       fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
+#                       aliases=['Estado:','CN', 'CH', 'LC', 'MT', 'RED'],
+#                       style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
+#               )
 
 
-            fgp.add_child(folium.GeoJson(data=UF_json,
-                                          tooltip=tooltip,
-                                          style_function = lambda x:{'fillColor':colormap(x['properties']['MEDIA_NOTAS']),
-                                                                    'fillcolor':'#black','fillOpacity':0.9,'weight':0.8})) 
-            map.add_child(fgp)
-            #map.add_child(folium.LayerControl())     
-            st_folium(map)
+#             fgp.add_child(folium.GeoJson(data=UF_json,
+#                                           tooltip=tooltip,
+#                                           style_function = lambda x:{'fillColor':colormap(x['properties']['MEDIA_NOTAS']),
+#                                                                     'fillcolor':'#black','fillOpacity':0.9,'weight':0.8})) 
+#             map.add_child(fgp)
+#             #map.add_child(folium.LayerControl())     
+#             st_folium(map)
             
     elif sprint == 'Sprint 3':     
         def df_unzip_convert(ano):
