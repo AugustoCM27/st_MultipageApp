@@ -218,8 +218,6 @@ with tab_analise:
             st.pyplot(fig)
             st.text('Adicionar link do colab')
         
-        #edição bia - adicionei os histogramas lgbt
-        #escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
         elif radio_analise == 'Nota média dos candidatos por região':
             ano = st.slider("Qual ano você deseja visualizar as distribuições?", 2014, 2022)
             escolha_radio = st.radio("Qual competência você deseja ver?", ["Redação", "Matemática", "Ciências Humanas", "Linguagens e Códigos", "Ciências da Natureza"])
@@ -443,6 +441,8 @@ with tab_analise:
             st.plotly_chart(fig_plot(media_regiao, int(ano)))
             
         if escolha_spt2 == "Mapas interativos":
+            df = pd.read_csv("MICRODADOS_ENEM_2022_spt2.zip", compression='zip', delimiter=';')
+            
             mapa_brasil = folium.Map(location=[-22.7864889,-50.6786708],zoom_start=4,
                                        tiles='Stamen Toner')
             headers = {
