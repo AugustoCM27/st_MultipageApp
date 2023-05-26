@@ -539,7 +539,7 @@ with tab_analise:
                 tiles='stamentoner'
             ) 
             
-            bounds = [[-34.0, -75.0], [6.0, -30.0]]
+            bounds = [[-33.75, -73.98], [5.27, -34.8]]
             folium.GeoJson(bounds).add_to(map)
             
             fgp = folium.FeatureGroup(name= 'Estados')
