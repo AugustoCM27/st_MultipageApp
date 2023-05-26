@@ -16,12 +16,13 @@ import descartes
 #import os
 
 # edição bia - teste mudança de cores
-# Read the contents of the styles.css file
-#with open('styles.css', 'r') as f:
-#    css = f.read()
 
-# Apply the custom CSS
-#st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
+def load_css(file_path):
+    with open(file_path) as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+load_css('https://github.com/AugustoCM27/st_MultipageApp/tree/main/style.css')
+
 # fim edição bia
 
 st.set_page_config(
