@@ -539,9 +539,6 @@ with tab_analise:
                 tiles='stamentoner'
             ) 
             
-            bounds = [[-33.75, -73.98], [5.27, -34.8]]
-            folium.GeoJson(bounds).add_to(map)
-            
             fgp = folium.FeatureGroup(name= 'Estados')
             tooltip=folium.features.GeoJsonTooltip(
                       fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
@@ -557,7 +554,7 @@ with tab_analise:
             map.add_child(fgp)
             map.add_child(folium.LayerControl())     
     
-            st_data = st_folium(map)
+            st_folium(map)
             
     elif sprint == 'Sprint 3':     
         def df_unzip_convert(ano):
