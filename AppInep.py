@@ -13,19 +13,6 @@ import warnings
 from shapely.errors import ShapelyDeprecationWarning
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning);
 import descartes
-import folium
-import requests
-from streamlit_folium import st_folium
-
-# edição bia - teste mudança de cores
-
-#def load_css(file_path):
-#    with open(file_path) as f:
-#        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-#load_css('https://github.com/AugustoCM27/st_MultipageApp/tree/main/style.css')
-
-# fim edição bia
 
 st.set_page_config(
     page_title='Liga DS - Projeto INEP',
@@ -441,6 +428,9 @@ with tab_analise:
             st.plotly_chart(fig_plot(media_regiao, int(ano)))
             
         if escolha_spt2 == "Mapas interativos":
+            import folium
+            import requests
+            from streamlit_folium import st_folium            
             df = pd.read_csv("MICRODADOS_ENEM_2022_spt2.zip", compression='zip', delimiter=';')
             
             mapa_brasil = folium.Map(location=[-22.7864889,-50.6786708],zoom_start=4,
