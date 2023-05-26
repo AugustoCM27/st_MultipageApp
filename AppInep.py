@@ -302,7 +302,7 @@ with tab_analise:
             return df
         
         escolha_spt2 = st.radio("Qual análise do Sprint 2 você deseja ver?",
-                                ["Análise temporal das notas", "Média das notas por região do Brasil"])
+                                ["Análise temporal das notas", "Média das notas por região do Brasil", "Mapas interativos"])
         if escolha_spt2 == "Análise temporal das notas":           
             # aplicando a função em todas as bases importadas
             listas_df = [[df2022], [df2021], [df2020], [df2019], [df2018], [df2017], [df2016], [df2015], [df2014]]
@@ -438,7 +438,9 @@ with tab_analise:
               return fig
         
             media_regiao = media_reg(df_)
-            st.plotly_chart(fig_plot(media_regiao, int(ano))) 
+            st.plotly_chart(fig_plot(media_regiao, int(ano)))
+        if escolha_spt2 == "Mapas interativos":
+            st.write("oi")
            
     elif sprint == 'Sprint 3':     
         def df_unzip_convert(ano):
