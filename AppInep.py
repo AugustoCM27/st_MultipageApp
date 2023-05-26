@@ -13,7 +13,8 @@ import warnings
 from shapely.errors import ShapelyDeprecationWarning
 warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning);
 import descartes
-#import os
+import folium
+import requests
 
 # edição bia - teste mudança de cores
 
@@ -439,6 +440,7 @@ with tab_analise:
         
             media_regiao = media_reg(df_)
             st.plotly_chart(fig_plot(media_regiao, int(ano)))
+            
         if escolha_spt2 == "Mapas interativos":
             st.write("oi")
            
