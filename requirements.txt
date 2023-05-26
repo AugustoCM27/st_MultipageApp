@@ -6,3 +6,4 @@ geobr==0.2.0
 descartes==1.1.0
 folium==0.10.0
 requests==2.31.0
+streamlit_folium==0.6.13
