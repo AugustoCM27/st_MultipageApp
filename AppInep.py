@@ -538,6 +538,10 @@ with tab_analise:
                 location=[-13.089461610967666, -55.910299337040286], zoom_start = 6,
                 tiles='stamentoner'
             ) 
+            
+            bounds = [[-34.0, -75.0], [6.0, -30.0]]
+            folium.GeoJson(bounds).add_to(map)
+            
             fgp = folium.FeatureGroup(name= 'Estados')
             tooltip=folium.features.GeoJsonTooltip(
                       fields=['UF','CN', 'CH', 'LC', 'MT', 'RED'],
@@ -552,7 +556,7 @@ with tab_analise:
                                                                     'fillcolor':'#black','fillOpacity':0.9,'weight':0.8})) 
             map.add_child(fgp)
             map.add_child(folium.LayerControl())     
-            
+    
             st_data = st_folium(map)
             
     elif sprint == 'Sprint 3':     
