@@ -126,7 +126,7 @@ with tab_analise:
                 plt.title("Distribuição da Tipo de Escola", fontsize=8)
                 st.pyplot(hist)
                 
-            st.text('Adicionar link do colab')
+            
         elif radio_analise == 'Análises por UF (Mapas)':           
             df = pd.read_csv('MICRODADOS_ENEM_2022_spt1.zip', compression='zip', delimiter=';')
             UFs = df["SG_UF_PROVA"].unique()
